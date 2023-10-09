@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c05t6khn5h02m"]
+
+[ext_resource type="PackedScene" uid="uid://drulietgo1s1s" path="res://projects/player/scenes/player.tscn" id="1_wje2c"]
+[ext_resource type="PackedScene" uid="uid://iw2y2tljhrwx" path="res://projects/player/scenes/terrain.tscn" id="2_fq08h"]
+
+[node name="main" type="Node2D"]
+
+[node name="Terrain" parent="." instance=ExtResource("2_fq08h")]
+
+[node name="player" parent="." instance=ExtResource("1_wje2c")]

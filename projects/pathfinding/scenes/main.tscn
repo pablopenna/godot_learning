@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfruie3x47csg"]
+
+[ext_resource type="Script" path="res://projects/pathfinding/scripts/Navigator.gd" id="1_m365i"]
+[ext_resource type="Texture2D" uid="uid://b4esa220ksdmd" path="res://icon.svg" id="2_xoxem"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_utkjk"]
+vertices = PackedVector2Array(872, 321, 888, 68, 921, 107, 945, 222, 1062, 161, 1076, 264, 1056, 67, 962, 34)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 0), PackedInt32Array(6, 3, 2, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(888, 68, 872, 321, 1076, 264, 1062, 161, 945, 222, 1056, 67, 962, 34, 921, 107)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_j2jdu"]
+vertices = PackedVector2Array(305, 219, 61, 340, 186, 185, 515, 48, 464, 224, 270, 380, 91, 134, 162, 100, 567, 159)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 0, 3), PackedInt32Array(2, 6, 7, 3), PackedInt32Array(4, 3, 8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(162, 100, 515, 48, 567, 159, 464, 224, 270, 380, 305, 219, 61, 340, 186, 185, 91, 134)])
+cell_size = 5.5
+
+[node name="main" type="Node2D"]
+
+[node name="NavigationRegion2D2" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_utkjk")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-1, -1)
+navigation_polygon = SubResource("NavigationPolygon_j2jdu")
+
+[node name="NavigationLink2D" type="NavigationLink2D" parent="."]
+start_position = Vector2(514, 48)
+end_position = Vector2(872, 320)
+
+[node name="Navigator" type="Node2D" parent="."]
+script = ExtResource("1_m365i")
+speed = 1.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigator"]
+
+[node name="TargetPosition" type="Node2D" parent="Navigator"]
+position = Vector2(1054, 67)
+
+[node name="Sprite2D" type="Sprite2D" parent="Navigator"]
+texture = ExtResource("2_xoxem")
