@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw5l7afyneemi"]
+
+[ext_resource type="Script" path="res://projects/state_machine/scripts/StateManager.gd" id="1_5j7ag"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/move.gd" id="2_ck8mh"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/idle.gd" id="3_m1ynn"]
+
+[node name="state_manager" type="Node2D" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_5j7ag")
+initial_state = NodePath("idle")
+
+[node name="move" type="Node" parent="."]
+script = ExtResource("2_ck8mh")
+
+[node name="idle" type="Node" parent="."]
+script = ExtResource("3_m1ynn")

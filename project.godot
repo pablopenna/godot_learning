@@ -11,6 +11,6 @@ config_version=5
 [application]
 
 config/name="testing01"
-run/main_scene="res://projects/player/scenes/main.tscn"
+run/main_scene="res://projects/state_machine/scenes/main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
