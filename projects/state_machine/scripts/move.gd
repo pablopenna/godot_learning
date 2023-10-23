@@ -1,10 +1,10 @@
 extends State
 
 func enter():
-	print_debug("Entering Move")
+	print("Entering Move")
 	
 func process():
-	print_debug("MOVE")
+	pass
 	
 func exit(new_state):
-	print_debug("Exiting Move")
+	print("Exiting Move")

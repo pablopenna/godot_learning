@@ -1,10 +1,10 @@
 extends State
 
 func enter():
-	print_debug("Entering Idle")
+	print("Entering Idle")
 	
 func process():
-	print_debug("IDLE")
+	pass
 	
 func exit(new_state):
-	print_debug("Exiting Idle")
+	print("Exiting Idle")

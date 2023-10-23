@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="testing01"
+config/name="Learning_Godot"
 run/main_scene="res://projects/state_machine/scenes/main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"

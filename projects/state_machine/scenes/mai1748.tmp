@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cha48on3shh4n"]
 
 [ext_resource type="PackedScene" uid="uid://cw5l7afyneemi" path="res://projects/state_machine/scenes/state_manager.tscn" id="1_eny85"]
-[ext_resource type="Script" path="res://projects/state_machine/scripts/main.gd" id="1_f66s2"]
+[ext_resource type="Script" path="res://projects/state_machine/scenes/main.gd" id="1_yv0so"]
 
 [node name="main" type="Node2D"]
-script = ExtResource("1_f66s2")
+script = ExtResource("1_yv0so")
 
 [node name="state_manager" parent="." instance=ExtResource("1_eny85")]
