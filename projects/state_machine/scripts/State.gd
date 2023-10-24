@@ -1,5 +1,7 @@
 class_name State extends Node
 
+signal change_to_state
+
 func enter():
 	pass
 	
