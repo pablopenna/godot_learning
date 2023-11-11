@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://doc7vi773287b"]
+
+[ext_resource type="Script" path="res://projects/state_machine/scripts/entity.gd" id="1_a7ans"]
+[ext_resource type="PackedScene" uid="uid://cw5l7afyneemi" path="res://projects/state_machine/scenes/state_manager.tscn" id="1_rck6o"]
+[ext_resource type="Texture2D" uid="uid://c2gvprutu15" path="res://common/sprites/statue.png" id="2_mlk2d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ran5a"]
+size = Vector2(20, 61)
+
+[node name="entity" type="CharacterBody2D"]
+script = ExtResource("1_a7ans")
+
+[node name="state_manager" parent="." node_paths=PackedStringArray("managed_entity") instance=ExtResource("1_rck6o")]
+managed_entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7, 6.5)
+shape = SubResource("RectangleShape2D_ran5a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_mlk2d")

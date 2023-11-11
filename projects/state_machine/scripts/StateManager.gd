@@ -1,17 +1,20 @@
 class_name StateManager extends Node
 
-@onready var states: Dictionary = get_children_as_state_dictionary()
-@onready var current_state: State = initial_state
+var states: Dictionary
+var current_state: State = initial_state
 @export var initial_state: State
+@export var managed_entity: Entity
 
 func _ready():
-	connect_change_state_signal_from_states()
+	states = get_children_as_state_dictionary()
+	current_state = initial_state
+	initialize_states()
 
 func _process(delta):
-	current_state.process()
+	current_state.process(delta)
 
 func _physics_process(delta):
-	current_state.physics_process()
+	current_state.physics_process(delta)
 
 func get_children_as_state_dictionary() -> Dictionary:
 	var children: Array[Node] = self.get_children()
@@ -22,10 +25,12 @@ func get_children_as_state_dictionary() -> Dictionary:
 		
 	return states
 	
-func connect_change_state_signal_from_states():
+func initialize_states():
 	for stateKey in states:
 		var state: State = states[stateKey]
+		
 		state.change_to_state.connect(on_change_to_state)
+		state.managed_entity = self.managed_entity
 
 func on_change_to_state(new_state_name: String):
 	var old_state = current_state

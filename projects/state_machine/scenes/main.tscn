@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cha48on3shh4n"]
+[gd_scene load_steps=3 format=3 uid="uid://cha48on3shh4n"]
 
-[ext_resource type="PackedScene" uid="uid://cw5l7afyneemi" path="res://projects/state_machine/scenes/state_manager.tscn" id="1_eny85"]
+[ext_resource type="PackedScene" uid="uid://doc7vi773287b" path="res://projects/state_machine/scenes/entity.tscn" id="1_nufnx"]
+[ext_resource type="PackedScene" uid="uid://iw2y2tljhrwx" path="res://projects/player/scenes/terrain.tscn" id="3_1yf81"]
 
 [node name="main" type="Node2D"]
 
-[node name="state_manager" parent="." instance=ExtResource("1_eny85")]
+[node name="Terrain" parent="." instance=ExtResource("3_1yf81")]
+
+[node name="entity" parent="." instance=ExtResource("1_nufnx")]
+position = Vector2(24, 0)
