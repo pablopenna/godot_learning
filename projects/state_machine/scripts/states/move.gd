@@ -3,10 +3,16 @@ extends State
 @export var speed: float = 50
 var target_velocity: Vector2
 
+func _ready():
+	state_name = "move"
+
 func enter():
 	print("Entering Move")
 	
 func process(delta):
+	if not managed_entity.is_on_floor():
+		change_to_state.emit("air")
+	
 	var direction = Vector3.ZERO
 
 	if Input.is_action_pressed("move_right"):

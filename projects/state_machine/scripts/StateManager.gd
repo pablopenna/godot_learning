@@ -20,8 +20,8 @@ func get_children_as_state_dictionary() -> Dictionary:
 	var children: Array[Node] = self.get_children()
 	var states: Dictionary = {}
 	
-	for child in children:
-		states[child.name] = child as State
+	for child in children as Array[State]:
+		states[child.state_name] = child
 		
 	return states
 	
