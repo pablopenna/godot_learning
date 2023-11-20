@@ -5,6 +5,7 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	# "move_and_slide" already takes delta time into account.
 	move_and_slide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

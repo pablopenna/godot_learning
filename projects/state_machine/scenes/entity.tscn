@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://doc7vi773287b"]
+[gd_scene load_steps=9 format=3 uid="uid://doc7vi773287b"]
 
 [ext_resource type="Script" path="res://projects/state_machine/scripts/Entity.gd" id="1_a4iy7"]
 [ext_resource type="Texture2D" uid="uid://c2gvprutu15" path="res://common/sprites/statue.png" id="2_mlk2d"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/idle.gd" id="4_otek0"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/move.gd" id="5_oq5y8"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/air.gd" id="6_fydva"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/jump.gd" id="7_2u4r5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ran5a"]
 size = Vector2(20, 61)
@@ -33,3 +34,6 @@ script = ExtResource("5_oq5y8")
 
 [node name="air" type="Node" parent="StateManager"]
 script = ExtResource("6_fydva")
+
+[node name="jump" type="Node" parent="StateManager"]
+script = ExtResource("7_2u4r5")

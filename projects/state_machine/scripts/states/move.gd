@@ -1,6 +1,6 @@
 extends State
 
-@export var speed: float = 50
+@export var speed: float = 200
 var target_velocity: Vector2
 
 func _ready():
@@ -12,20 +12,20 @@ func enter():
 func process(delta):
 	if not managed_entity.is_on_floor():
 		change_to_state.emit("air")
-	
-	var direction = Vector3.ZERO
 
+	target_velocity.x = 0
 	if Input.is_action_pressed("move_right"):
-		direction.x += 1
+		target_velocity.x = Vector2.RIGHT.x + speed
 	if Input.is_action_pressed("move_left"):
-		direction.x -= 1
+		target_velocity.x = Vector2.LEFT.x * speed
 	
-	target_velocity.x = direction.x * speed
+	managed_entity.velocity = target_velocity
+	
+	if Input.is_action_pressed("jump"):
+		change_to_state.emit("jump")
 
 	if target_velocity.x == 0:
 		change_to_state.emit("idle")
-	else:
-		managed_entity.velocity = target_velocity
 	
 func exit(new_state):
 	print("Exiting Move")
