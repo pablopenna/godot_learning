@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://doc7vi773287b"]
+[gd_scene load_steps=10 format=3 uid="uid://doc7vi773287b"]
 
 [ext_resource type="Script" path="res://projects/state_machine/scripts/Entity.gd" id="1_a4iy7"]
 [ext_resource type="Texture2D" uid="uid://c2gvprutu15" path="res://common/sprites/statue.png" id="2_mlk2d"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/move.gd" id="5_oq5y8"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/air.gd" id="6_fydva"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/jump.gd" id="7_2u4r5"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/dash.gd" id="8_8gimc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ran5a"]
 size = Vector2(20, 61)
@@ -37,3 +38,14 @@ script = ExtResource("6_fydva")
 
 [node name="jump" type="Node" parent="StateManager"]
 script = ExtResource("7_2u4r5")
+
+[node name="dash" type="Node" parent="StateManager"]
+script = ExtResource("8_8gimc")
+
+[node name="duration" type="Timer" parent="StateManager/dash"]
+one_shot = true
+
+[node name="cooldown" type="Timer" parent="StateManager/dash"]
+wait_time = 0.5
+one_shot = true
+autostart = true

@@ -15,7 +15,14 @@ func enter():
 func exit(newState):
 	print("Exiting Air")
 	
-func process(delta):
+func process(delta):		
+	if Input.is_action_pressed("dash"):
+		change_to_state.emit("dash")
+		
+	if managed_entity.is_on_floor():
+		change_to_state.emit("idle")
+	
+func physics_process(delta):
 	managed_entity.velocity.x = 0
 	if Input.is_action_pressed("move_right"):
 		managed_entity.velocity.x = speed
@@ -23,12 +30,6 @@ func process(delta):
 		managed_entity.velocity.x = -1 * speed
 	
 	managed_entity.velocity.y = Vector2.DOWN.y * _get_velocity_applying_gravity(managed_entity.velocity.y, delta)
-		
-	if managed_entity.is_on_floor():
-		change_to_state.emit("idle")
-	
-func physics_process(delta):
-	pass
 	
 # MRUA -> v = v0 + a*t
 func _get_velocity_applying_gravity(initial_velocity, time) -> float:

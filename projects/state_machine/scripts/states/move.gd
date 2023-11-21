@@ -23,6 +23,9 @@ func process(delta):
 	
 	if Input.is_action_pressed("jump"):
 		change_to_state.emit("jump")
+		
+	if Input.is_action_pressed("dash"):
+		change_to_state.emit("dash")
 
 	if target_velocity.x == 0:
 		change_to_state.emit("idle")
