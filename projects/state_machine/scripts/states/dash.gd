@@ -16,6 +16,7 @@ func enter():
 		_finish_dash()
 
 func exit(new_state):
+	managed_entity.velocity = Vector2.ZERO
 	print("Exiting Dash")
 	
 func process(delta):

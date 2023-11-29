@@ -15,7 +15,7 @@ func enter():
 func exit(newState):
 	print("Exiting Air")
 	
-func process(delta):		
+func process(delta):
 	if Input.is_action_pressed("dash"):
 		change_to_state.emit("dash")
 		

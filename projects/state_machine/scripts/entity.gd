@@ -20,4 +20,3 @@ func _update_facing_direction():
 	var last_motion_direction = velocity
 	if last_motion_direction.x != 0:
 		facing_direction = FacingDirection.RIGHT if last_motion_direction.x > 0 else FacingDirection.LEFT
-	print(facing_direction)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://doc7vi773287b"]
+[gd_scene load_steps=11 format=3 uid="uid://doc7vi773287b"]
 
 [ext_resource type="Script" path="res://projects/state_machine/scripts/Entity.gd" id="1_a4iy7"]
 [ext_resource type="Texture2D" uid="uid://c2gvprutu15" path="res://common/sprites/statue.png" id="2_mlk2d"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/StateManager.gd" id="3_fpma6"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/StateLabel.gd" id="3_vvn2j"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/idle.gd" id="4_otek0"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/move.gd" id="5_oq5y8"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/air.gd" id="6_fydva"]
@@ -21,6 +22,18 @@ shape = SubResource("RectangleShape2D_ran5a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_mlk2d")
+
+[node name="StateLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("monitored_state_manager")]
+offset_left = -36.0
+offset_top = -60.0
+offset_right = 66.0
+offset_bottom = -37.0
+text = "Placeholder"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("3_vvn2j")
+monitored_state_manager = NodePath("../StateManager")
 
 [node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("initial_state", "managed_entity")]
 script = ExtResource("3_fpma6")
