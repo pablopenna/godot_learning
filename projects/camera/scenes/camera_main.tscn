@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlpytprq1ow7j"]
+
+[ext_resource type="Script" path="res://projects/camera/scripts/Target.gd" id="1_5baui"]
+[ext_resource type="Script" path="res://projects/camera/scripts/Camera.gd" id="1_pylbk"]
+
+[node name="CameraMain" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("1_pylbk")
+target = NodePath("../Target")
+
+[node name="Target" type="CharacterBody2D" parent="."]
+script = ExtResource("1_5baui")
+
+[node name="Shape" type="Polygon2D" parent="Target"]
+polygon = PackedVector2Array(-56, -87, 78, -83, 80, 55, -60, 53)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Target"]
+
+[connection signal="screen_exited" from="Target/VisibleOnScreenNotifier2D" to="Camera2D" method="_on_visible_on_screen_notifier_2d_screen_exited"]
