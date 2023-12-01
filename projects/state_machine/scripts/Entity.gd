@@ -9,7 +9,7 @@ func _ready():
 
 func _physics_process(delta):
 	_update_facing_direction()
-	# "move_and_slide" already takes delta time into account.
+	# "move_and_slide" already takes delta time into account
 	move_and_slide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
