@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://doc7vi773287b"]
+[gd_scene load_steps=14 format=3 uid="uid://doc7vi773287b"]
 
 [ext_resource type="Script" path="res://projects/state_machine/scripts/Entity.gd" id="1_a4iy7"]
 [ext_resource type="Texture2D" uid="uid://c2gvprutu15" path="res://common/sprites/statue.png" id="2_mlk2d"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/jump.gd" id="7_2u4r5"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/dash.gd" id="8_8gimc"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_slide.gd" id="10_kfvwa"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_unstick.gd" id="11_kruny"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_jump.gd" id="12_es6y8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ran5a"]
 size = Vector2(20, 61)
@@ -66,3 +68,9 @@ autostart = true
 
 [node name="wall_slide" type="Node" parent="StateManager"]
 script = ExtResource("10_kfvwa")
+
+[node name="wall_unstick" type="Node" parent="StateManager"]
+script = ExtResource("11_kruny")
+
+[node name="wall_jump" type="Node" parent="StateManager"]
+script = ExtResource("12_es6y8")
