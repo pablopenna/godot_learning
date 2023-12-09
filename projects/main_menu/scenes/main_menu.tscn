@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhvk6jmppvk6t"]
+
+[ext_resource type="Script" path="res://projects/main_menu/scripts/main_menu.gd" id="1_fmwil"]
+[ext_resource type="PackedScene" uid="uid://dlpytprq1ow7j" path="res://projects/camera/scenes/camera_main.tscn" id="2_5m7jv"]
+[ext_resource type="PackedScene" uid="uid://cha48on3shh4n" path="res://projects/state_machine/scenes/main.tscn" id="3_ry20f"]
+[ext_resource type="PackedScene" uid="uid://cfruie3x47csg" path="res://projects/pathfinding/scenes/main.tscn" id="4_520ik"]
+[ext_resource type="PackedScene" uid="uid://c05t6khn5h02m" path="res://projects/player/scenes/main.tscn" id="5_3sg8f"]
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_fmwil")
+camera_scene = ExtResource("2_5m7jv")
+state_machine_scene = ExtResource("3_ry20f")
+path_finding_scene = ExtResource("4_520ik")
+player_scene = ExtResource("5_3sg8f")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -24.0
+offset_right = 20.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "_Main Menu_"
+fit_content = true
+
+[node name="Camera" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Camera"
+
+[node name="State Machine" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "State Machine"
+
+[node name="Path Finding" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Path Finding"
+
+[node name="Player" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Player"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Camera" to="." method="_on_camera_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/State Machine" to="." method="_on_state_machine_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Path Finding" to="." method="_on_path_finding_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Player" to="." method="_on_player_pressed"]
