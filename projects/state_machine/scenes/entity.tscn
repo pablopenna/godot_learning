@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://doc7vi773287b"]
+[gd_scene load_steps=15 format=3 uid="uid://doc7vi773287b"]
 
 [ext_resource type="Script" path="res://projects/state_machine/scripts/Entity.gd" id="1_a4iy7"]
 [ext_resource type="Texture2D" uid="uid://c2gvprutu15" path="res://common/sprites/statue.png" id="2_mlk2d"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_slide.gd" id="10_kfvwa"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_unstick.gd" id="11_kruny"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_jump.gd" id="12_es6y8"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/air_stomp.gd" id="13_q2k84"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ran5a"]
 size = Vector2(20, 61)
@@ -57,8 +58,10 @@ script = ExtResource("7_2u4r5")
 
 [node name="dash" type="Node" parent="StateManager"]
 script = ExtResource("8_8gimc")
+dash_speed = 600
 
 [node name="duration" type="Timer" parent="StateManager/dash"]
+wait_time = 0.3
 one_shot = true
 
 [node name="cooldown" type="Timer" parent="StateManager/dash"]
@@ -74,3 +77,7 @@ script = ExtResource("11_kruny")
 
 [node name="wall_jump" type="Node" parent="StateManager"]
 script = ExtResource("12_es6y8")
+
+[node name="air_stomp" type="Node" parent="StateManager"]
+script = ExtResource("13_q2k84")
+down_speed = 1000

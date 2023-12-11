@@ -20,6 +20,9 @@ func process(delta):
 	if Input.is_action_pressed("dash"):
 		change_to_state.emit("dash")
 		
+	if Input.is_action_pressed("move_down") and Input.is_action_pressed("jump"):
+		change_to_state.emit("air_stomp")
+		
 	if managed_entity.is_on_floor():
 		change_to_state.emit("idle")
 	
