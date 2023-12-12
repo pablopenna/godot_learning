@@ -1,10 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://c05t6khn5h02m"]
+[gd_scene load_steps=4 format=3 uid="uid://c05t6khn5h02m"]
 
 [ext_resource type="PackedScene" uid="uid://drulietgo1s1s" path="res://projects/player/scenes/player.tscn" id="1_wje2c"]
 [ext_resource type="PackedScene" uid="uid://iw2y2tljhrwx" path="res://projects/player/scenes/terrain.tscn" id="2_fq08h"]
+[ext_resource type="PackedScene" uid="uid://dptcjh7q8w511" path="res://projects/player/scenes/dummy.tscn" id="3_uaits"]
 
 [node name="main" type="Node2D"]
 
 [node name="Terrain" parent="." instance=ExtResource("2_fq08h")]
 
 [node name="player" parent="." instance=ExtResource("1_wje2c")]
+position = Vector2(94, 159)
+
+[node name="Node2D" parent="." instance=ExtResource("3_uaits")]
+position = Vector2(374, 189)
