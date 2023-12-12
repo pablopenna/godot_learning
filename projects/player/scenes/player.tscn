@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://drulietgo1s1s"]
+[gd_scene load_steps=5 format=3 uid="uid://drulietgo1s1s"]
 
 [ext_resource type="Script" path="res://projects/player/scripts/player.gd" id="1_mofd7"]
 [ext_resource type="Texture2D" uid="uid://c2gvprutu15" path="res://common/sprites/statue.png" id="2_2nkj3"]
+[ext_resource type="PackedScene" uid="uid://cn3hr36koyvbg" path="res://projects/player/scenes/invocation.tscn" id="2_57qlg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lb8od"]
 size = Vector2(22, 70)
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_mofd7")
+invocationScene = ExtResource("2_57qlg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_2nkj3")
