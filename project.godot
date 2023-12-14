@@ -15,6 +15,10 @@ run/main_scene="res://projects/main_menu/scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+FacingDirectionUtils="*res://common/utils/facing_direction.gd"
+
 [input]
 
 move_right={

@@ -15,7 +15,7 @@ func receiveDamage():
 	emit_signal("damaged")
 	$RichTextLabel.text = "Ouch!"
 	print("ouch")
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(0.5).timeout
 	$RichTextLabel.text = ""
 
 func _on_area_entered(area):

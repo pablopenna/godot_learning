@@ -8,6 +8,7 @@ const JUMP_VELOCITY = -400.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var invocationScene: PackedScene
+var facing_direction = FacingDirectionUtils.FacingDirection.RIGHT
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -21,6 +22,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("dash"):
 		var invocation: Node2D = invocationScene.instantiate()
 		invocation.position = position
+		if facing_direction == FacingDirectionUtils.FacingDirection.LEFT:
+			invocation.scale.x = -1
 		get_tree().get_root().add_child(invocation)
 
 	# Get the input direction and handle the movement/deceleration.
@@ -30,5 +33,8 @@ func _physics_process(delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+		
+	# Update facing direction
+	facing_direction = FacingDirectionUtils.getFacingDirectionFromVelocity(velocity, facing_direction)
 
 	move_and_slide()
