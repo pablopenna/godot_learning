@@ -2,43 +2,32 @@
 
 [ext_resource type="Texture2D" uid="uid://fg7p2gwja7r5" path="res://common/sprites/characters/Training_dummy.png" id="1_848eq"]
 [ext_resource type="Script" path="res://projects/player/scripts/dummy.gd" id="1_c6xtj"]
-[ext_resource type="Script" path="res://projects/player/scripts/Hurtbox.gd" id="2_a8u8k"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1gro"]
-size = Vector2(39, 70)
+[ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://projects/player/scenes/hurtbox.tscn" id="3_y4b4m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ciq7n"]
 size = Vector2(22, 69)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njfmb"]
+
 [node name="Dummy" type="CharacterBody2D"]
 collision_layer = 0
+collision_mask = 3
 script = ExtResource("1_c6xtj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_848eq")
 
-[node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 8
-script = ExtResource("2_a8u8k")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0.5, 4)
-shape = SubResource("RectangleShape2D_j1gro")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Hurtbox"]
-offset_left = -55.0
-offset_top = -89.0
-offset_right = 58.0
-offset_bottom = -49.0
-text = "PLACEHOLDER"
-fit_content = true
-autowrap_mode = 0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_ciq7n")
 
-[connection signal="area_entered" from="Hurtbox" to="Hurtbox" method="_on_area_entered"]
+[node name="Hurtbox" parent="." instance=ExtResource("3_y4b4m")]
+hitbox_collision_layer = 4
+hitbox_collision_mask = 8
+show_debug_label = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_njfmb")
+
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]

@@ -329,5 +329,6 @@ texture = ExtResource("1_cdht7")
 26:8/0/physics_layer_0/angular_velocity = 0.0
 
 [resource]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 0
 sources/1 = SubResource("TileSetAtlasSource_uwhoq")
