@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://drulietgo1s1s"]
+[gd_scene load_steps=6 format=3 uid="uid://drulietgo1s1s"]
 
 [ext_resource type="Script" path="res://projects/player/scripts/player.gd" id="1_mofd7"]
 [ext_resource type="Texture2D" uid="uid://c2gvprutu15" path="res://common/sprites/statue.png" id="2_2nkj3"]
-[ext_resource type="PackedScene" uid="uid://cn3hr36koyvbg" path="res://projects/player/scenes/invocation.tscn" id="2_57qlg"]
+[ext_resource type="PackedScene" uid="uid://cn3hr36koyvbg" path="res://common/scenes/invocation/invocation.tscn" id="2_57qlg"]
+[ext_resource type="PackedScene" uid="uid://bdf5bwv2v64el" path="res://common/scenes/invocation_factory/invocation_factory.tscn" id="4_e21yq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lb8od"]
 size = Vector2(22, 70)
@@ -10,7 +11,6 @@ size = Vector2(22, 70)
 [node name="player" type="CharacterBody2D"]
 collision_mask = 2
 script = ExtResource("1_mofd7")
-invocationScene = ExtResource("2_57qlg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_2nkj3")
@@ -18,3 +18,7 @@ texture = ExtResource("2_2nkj3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(7, 3)
 shape = SubResource("RectangleShape2D_lb8od")
+
+[node name="InvocationFactory" parent="." node_paths=PackedStringArray("entity_to_get_facing_direction_from") instance=ExtResource("4_e21yq")]
+invocationScene = ExtResource("2_57qlg")
+entity_to_get_facing_direction_from = NodePath("..")

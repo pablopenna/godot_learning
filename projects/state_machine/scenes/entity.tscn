@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://doc7vi773287b"]
+[gd_scene load_steps=17 format=3 uid="uid://doc7vi773287b"]
 
 [ext_resource type="Script" path="res://projects/state_machine/scripts/Entity.gd" id="1_a4iy7"]
 [ext_resource type="Texture2D" uid="uid://c2gvprutu15" path="res://common/sprites/statue.png" id="2_mlk2d"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_unstick.gd" id="11_kruny"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_jump.gd" id="12_es6y8"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/air_stomp.gd" id="13_q2k84"]
+[ext_resource type="PackedScene" uid="uid://bdf5bwv2v64el" path="res://common/scenes/invocation_factory/invocation_factory.tscn" id="14_xvvrk"]
+[ext_resource type="PackedScene" uid="uid://cn3hr36koyvbg" path="res://common/scenes/invocation/invocation.tscn" id="15_srq5i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ran5a"]
 size = Vector2(20, 61)
@@ -81,3 +83,7 @@ script = ExtResource("12_es6y8")
 [node name="air_stomp" type="Node" parent="StateManager"]
 script = ExtResource("13_q2k84")
 down_speed = 1000
+
+[node name="InvocationFactory" parent="." node_paths=PackedStringArray("entity_to_get_facing_direction_from") instance=ExtResource("14_xvvrk")]
+invocationScene = ExtResource("15_srq5i")
+entity_to_get_facing_direction_from = NodePath("..")

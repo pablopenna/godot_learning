@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cn3hr36koyvbg"]
 
-[ext_resource type="Script" path="res://projects/player/scripts/invocation.gd" id="1_kbjua"]
-[ext_resource type="Texture2D" uid="uid://byhgy5al6wto" path="res://common/sprites/characters/NightBorne.png" id="2_f1due"]
+[ext_resource type="Script" path="res://common/scenes/invocation/invocation.gd" id="1_641w6"]
+[ext_resource type="Texture2D" uid="uid://byhgy5al6wto" path="res://common/sprites/characters/NightBorne.png" id="2_w7uxh"]
 
 [sub_resource type="Animation" id="Animation_3i6ba"]
 resource_name = "dark_knight"
@@ -72,13 +72,13 @@ size = Vector2(80.5, 33)
 size = Vector2(100, 25)
 
 [node name="Invocation" type="Node2D"]
-script = ExtResource("1_kbjua")
+script = ExtResource("1_641w6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -6)
 scale = Vector2(2, 2)
-texture = ExtResource("2_f1due")
+texture = ExtResource("2_w7uxh")
 hframes = 23
 vframes = 5
 frame = 57

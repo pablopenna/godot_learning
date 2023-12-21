@@ -16,4 +16,4 @@ func _process(delta):
 	pass
 	
 func _update_facing_direction():
-	facing_direction = FacingDirectionUtils.getFacingDirectionFromVelocity(velocity, facing_direction)
+	facing_direction = FacingDirectionUtils.getFacingDirectionFromVelocityWithDefault(velocity, facing_direction)

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://drulietgo1s1s" path="res://projects/player/scenes/player.tscn" id="1_wje2c"]
 [ext_resource type="PackedScene" uid="uid://iw2y2tljhrwx" path="res://common/scenes/terrain.tscn" id="2_fq08h"]
-[ext_resource type="PackedScene" uid="uid://dptcjh7q8w511" path="res://projects/player/scenes/dummy.tscn" id="3_uaits"]
+[ext_resource type="PackedScene" uid="uid://dptcjh7q8w511" path="res://common/scenes/dummy/dummy.tscn" id="3_uaits"]
 
 [node name="main" type="Node2D"]
 
