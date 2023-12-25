@@ -6,7 +6,8 @@ extends Node
 @export var player_scene: PackedScene
 
 func _ready():
-	_set_screen_size(window_size)
+	# _set_screen_size(window_size)
+	pass
 	
 func _set_screen_size(size: Vector2):
 	get_viewport().get_window().size = size
