@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://drulietgo1s1s" path="res://projects/player/scenes/player.tscn" id="1_wje2c"]
 [ext_resource type="PackedScene" uid="uid://iw2y2tljhrwx" path="res://common/scenes/terrain.tscn" id="2_fq08h"]
 [ext_resource type="PackedScene" uid="uid://dptcjh7q8w511" path="res://common/scenes/dummy/dummy.tscn" id="3_uaits"]
-[ext_resource type="PackedScene" uid="uid://dxh2khy3nyldc" path="res://common/scenes/fps_counter/fps_counter.tscn" id="4_ktvvd"]
+[ext_resource type="PackedScene" uid="uid://cs5xij1m0eito" path="res://projects/main_menu/scenes/return_to_main_menu.tscn" id="4_yj6xd"]
 
 [node name="main" type="Node2D"]
 
@@ -12,7 +12,7 @@
 [node name="player" parent="." instance=ExtResource("1_wje2c")]
 position = Vector2(94, 159)
 
-[node name="Node2D" parent="." instance=ExtResource("3_uaits")]
+[node name="dummy" parent="." instance=ExtResource("3_uaits")]
 position = Vector2(374, 189)
 
-[node name="FPS_Counter" parent="." instance=ExtResource("4_ktvvd")]
+[node name="ReturnToMainMenu" parent="." instance=ExtResource("4_yj6xd")]

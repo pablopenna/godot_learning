@@ -8,6 +8,10 @@ extends Node
 func _ready():
 	# _set_screen_size(window_size)
 	pass
+
+func _unhandled_input(event: InputEvent):
+	if event.is_action_released("ui_cancel"):
+		get_tree().quit()
 	
 func _set_screen_size(size: Vector2):
 	get_viewport().get_window().size = size
