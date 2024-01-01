@@ -6,7 +6,6 @@ func _ready():
 func enter():
 	print("Entering Idle")
 
-# TODO: Move input handling to input() out from process()
 func process(delta):
 	if not managed_entity.is_on_floor():
 		change_to_state.emit("air")

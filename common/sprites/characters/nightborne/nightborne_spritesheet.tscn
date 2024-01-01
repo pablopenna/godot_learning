@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://28mkgryf3qhl"]
+
+[ext_resource type="Texture2D" uid="uid://byhgy5al6wto" path="res://common/sprites/characters/nightborne/NightBorne.png" id="1_pp7d5"]
+
+[node name="nightborne_spritesheet" type="Sprite2D"]
+texture = ExtResource("1_pp7d5")
+hframes = 23
+vframes = 5

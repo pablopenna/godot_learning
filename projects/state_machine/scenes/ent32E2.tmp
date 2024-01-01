@@ -1,15 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://doc7vi773287b"]
+[gd_scene load_steps=17 format=3 uid="uid://doc7vi773287b"]
 
 [ext_resource type="Script" path="res://projects/state_machine/scripts/Entity.gd" id="1_a4iy7"]
 [ext_resource type="Texture2D" uid="uid://c2gvprutu15" path="res://common/sprites/statue.png" id="2_mlk2d"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/StateManager.gd" id="3_fpma6"]
-[ext_resource type="PackedScene" uid="uid://28mkgryf3qhl" path="res://common/sprites/characters/nightborne/nightborne_spritesheet.tscn" id="3_ihl6q"]
-[ext_resource type="Animation" uid="uid://csv6kticuyffn" path="res://common/sprites/characters/nightborne/idle.res" id="3_iyr77"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/StateLabel.gd" id="3_vvn2j"]
-[ext_resource type="Script" path="res://projects/state_machine/scripts/EntitySprite.gd" id="4_5f3cj"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/idle.gd" id="4_otek0"]
-[ext_resource type="Animation" uid="uid://dxscwrx0m4mm0" path="res://common/sprites/characters/nightborne/run.res" id="4_x8utw"]
-[ext_resource type="Script" path="res://projects/state_machine/scripts/EntityAnimationPlayer.gd" id="5_cq2cb"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/move.gd" id="5_oq5y8"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/air.gd" id="6_fydva"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/jump.gd" id="7_2u4r5"]
@@ -22,43 +17,19 @@
 [ext_resource type="PackedScene" uid="uid://cn3hr36koyvbg" path="res://common/scenes/invocation/invocation.tscn" id="15_srq5i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ran5a"]
-size = Vector2(41, 51)
-
-[sub_resource type="Animation" id="Animation_76u1i"]
-length = 0.001
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_qxkjg"]
-_data = {
-"RESET": SubResource("Animation_76u1i"),
-"idle": ExtResource("3_iyr77"),
-"run": ExtResource("4_x8utw")
-}
+size = Vector2(20, 61)
 
 [node name="entity" type="CharacterBody2D"]
 script = ExtResource("1_a4iy7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5.5, 11.5)
+position = Vector2(7, 6.5)
 shape = SubResource("RectangleShape2D_ran5a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("2_mlk2d")
 
-[node name="spritesheet" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_ihl6q")]
-position = Vector2(5, -18)
-scale = Vector2(2.5, 2.5)
-frame = 5
-script = ExtResource("4_5f3cj")
-entity = NodePath("..")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_qxkjg")
-}
-script = ExtResource("5_cq2cb")
-
-[node name="StateLabel" type="RichTextLabel" parent="."]
+[node name="StateLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("monitored_state_manager")]
 offset_left = -36.0
 offset_top = -60.0
 offset_right = 66.0
@@ -68,6 +39,7 @@ fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("3_vvn2j")
+monitored_state_manager = NodePath("../StateManager")
 
 [node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("initial_state", "managed_entity")]
 script = ExtResource("3_fpma6")

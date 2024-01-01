@@ -18,8 +18,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-FacingDirectionUtils="*res://common/utils/facing_direction.gd"
 FpsCounter="*res://common/scenes/fps_counter/fps_counter.tscn"
+EntityEvents="*res://projects/state_machine/scripts/EntityEvents.gd"
 
 [display]
 

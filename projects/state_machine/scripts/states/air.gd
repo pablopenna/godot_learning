@@ -30,12 +30,7 @@ func process(delta):
 		change_to_state.emit("wall_slide")
 	
 func physics_process(delta):
-	# managed_entity.velocity.x = 0
-	if Input.is_action_pressed("move_right"):
-		managed_entity.velocity.x = speed
-	if Input.is_action_pressed("move_left"):
-		managed_entity.velocity.x = -1 * speed
-	
+	managed_entity.velocity.x = Input.get_axis("move_left", "move_right") * speed
 	managed_entity.velocity.y = Vector2.DOWN.y * _get_velocity_applying_gravity(managed_entity.velocity.y, delta)
 	
 # MRUA -> v = v0 + a*t

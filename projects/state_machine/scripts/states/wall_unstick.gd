@@ -12,7 +12,7 @@ func exit(newState):
 	print("Exiting Wall Unstick")
 	
 func process(delta):
-	# managed_entity.is_on_wall() is only true when attached to a wall to the left of the entity
+	# BUG - managed_entity.is_on_wall() is only true when attached to a wall to the left of the entity
 	var unstick_direction = managed_entity.get_wall_normal()
 	managed_entity.velocity = unstick_direction * unstick_velocity
 		
