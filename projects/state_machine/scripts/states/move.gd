@@ -12,14 +12,8 @@ func enter():
 func process(delta):
 	if not managed_entity.is_on_floor():
 		change_to_state.emit("air")
-
-	target_velocity.x = 0
-	if Input.is_action_pressed("move_right"):
-		target_velocity.x = Vector2.RIGHT.x + speed
-	if Input.is_action_pressed("move_left"):
-		target_velocity.x = Vector2.LEFT.x * speed
 	
-	managed_entity.velocity = target_velocity
+	managed_entity.velocity.x = Input.get_axis("move_left", "move_right") * speed
 	
 	if Input.is_action_pressed("jump"):
 		change_to_state.emit("jump")
@@ -27,7 +21,7 @@ func process(delta):
 	if Input.is_action_pressed("dash"):
 		change_to_state.emit("dash")
 
-	if target_velocity.x == 0:
+	if managed_entity.velocity.x == 0:
 		change_to_state.emit("idle")
 	
 func exit(new_state):

@@ -1,0 +1,135 @@
+[gd_scene load_steps=23 format=3 uid="uid://d01xmvtwdaa5f"]
+
+[ext_resource type="Script" path="res://projects/state_machine/scripts/StateLabel.gd" id="1_6ecyv"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/StateManager.gd" id="2_76hbj"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/idle.gd" id="3_6r46w"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/move.gd" id="4_o17g8"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/air.gd" id="5_n07eh"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/jump.gd" id="6_e2eaj"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/dash.gd" id="7_pjqgm"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_slide.gd" id="8_bxrsb"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_unstick.gd" id="9_8603q"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_jump.gd" id="10_djtw7"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/air_stomp.gd" id="11_ybas7"]
+[ext_resource type="PackedScene" uid="uid://bdf5bwv2v64el" path="res://common/scenes/invocation_factory/invocation_factory.tscn" id="12_oi5i3"]
+[ext_resource type="PackedScene" uid="uid://cn3hr36koyvbg" path="res://common/scenes/invocation/invocation.tscn" id="13_7vvt5"]
+[ext_resource type="PackedScene" uid="uid://bbx8v44fbyor4" path="res://common/scenes/entity/entity.tscn" id="14_i37u2"]
+[ext_resource type="PackedScene" uid="uid://28mkgryf3qhl" path="res://common/sprites/characters/nightborne/nightborne_spritesheet.tscn" id="15_jdrqr"]
+[ext_resource type="Script" path="res://common/scenes/entity/EntitySprite.gd" id="16_c7kal"]
+[ext_resource type="Animation" uid="uid://bichib6d0wqpy" path="res://common/sprites/characters/nightborne/default.res" id="17_8al3r"]
+[ext_resource type="Animation" uid="uid://bdrjspb6yb5li" path="res://common/sprites/characters/nightborne/run.res" id="18_b14df"]
+[ext_resource type="Script" path="res://common/scenes/entity/EntityAnimationPlayer.gd" id="19_08bgl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ran5a"]
+size = Vector2(41, 51)
+
+[sub_resource type="Animation" id="Animation_q2o48"]
+resource_name = "idle"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spritesheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_egdts"]
+_data = {
+"default": ExtResource("17_8al3r"),
+"idle": SubResource("Animation_q2o48"),
+"run": ExtResource("18_b14df")
+}
+
+[node name="Player" type="Node"]
+
+[node name="StateLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("node_to_follow")]
+offset_left = -36.0
+offset_top = -60.0
+offset_right = 66.0
+offset_bottom = -37.0
+text = "Placeholder"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("1_6ecyv")
+node_to_follow = NodePath("../Entity")
+text_offset = Vector2(0, -50)
+
+[node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("initial_state", "managed_entity")]
+script = ExtResource("2_76hbj")
+initial_state = NodePath("idle")
+managed_entity = NodePath("../Entity")
+
+[node name="idle" type="Node" parent="StateManager"]
+script = ExtResource("3_6r46w")
+
+[node name="move" type="Node" parent="StateManager"]
+script = ExtResource("4_o17g8")
+speed = 300.0
+
+[node name="air" type="Node" parent="StateManager"]
+script = ExtResource("5_n07eh")
+speed = 200
+
+[node name="jump" type="Node" parent="StateManager"]
+script = ExtResource("6_e2eaj")
+
+[node name="dash" type="Node" parent="StateManager"]
+script = ExtResource("7_pjqgm")
+dash_speed = 600
+
+[node name="duration" type="Timer" parent="StateManager/dash"]
+wait_time = 0.3
+one_shot = true
+
+[node name="cooldown" type="Timer" parent="StateManager/dash"]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="wall_slide" type="Node" parent="StateManager"]
+script = ExtResource("8_bxrsb")
+
+[node name="wall_unstick" type="Node" parent="StateManager"]
+script = ExtResource("9_8603q")
+
+[node name="wall_jump" type="Node" parent="StateManager"]
+script = ExtResource("10_djtw7")
+
+[node name="air_stomp" type="Node" parent="StateManager"]
+script = ExtResource("11_ybas7")
+down_speed = 1000
+
+[node name="InvocationFactory" parent="." node_paths=PackedStringArray("entity_to_get_facing_direction_from") instance=ExtResource("12_oi5i3")]
+invocationScene = ExtResource("13_7vvt5")
+entity_to_get_facing_direction_from = NodePath("../Entity")
+
+[node name="Entity" parent="." instance=ExtResource("14_i37u2")]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entity"]
+position = Vector2(5.5, 11.5)
+shape = SubResource("RectangleShape2D_ran5a")
+
+[node name="spritesheet" parent="Entity" node_paths=PackedStringArray("entity") instance=ExtResource("15_jdrqr")]
+position = Vector2(5, -18)
+scale = Vector2(2.5, 2.5)
+frame = 99
+script = ExtResource("16_c7kal")
+entity = NodePath("..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Entity"]
+libraries = {
+"": SubResource("AnimationLibrary_egdts")
+}
+script = ExtResource("19_08bgl")
+
+[connection signal="state_changed" from="StateManager" to="StateLabel" method="_on_state_change"]
+[connection signal="state_changed" from="StateManager" to="Entity/AnimationPlayer" method="_on_change_state"]

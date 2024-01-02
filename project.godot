@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 FpsCounter="*res://common/scenes/fps_counter/fps_counter.tscn"
-EntityEvents="*res://projects/state_machine/scripts/EntityEvents.gd"
 
 [display]
 

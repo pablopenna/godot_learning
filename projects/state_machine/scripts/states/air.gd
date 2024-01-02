@@ -31,7 +31,7 @@ func process(delta):
 	
 func physics_process(delta):
 	var input_dir = Input.get_axis("move_left", "move_right")
-	if input_dir != 0:
+	if input_dir != 0: # Need to do this as to not overwrite the movement of other states like wall_jump if there is no input while on air
 		managed_entity.velocity.x =  input_dir * speed
 		
 	managed_entity.velocity.y = Vector2.DOWN.y * _get_velocity_applying_gravity(managed_entity.velocity.y, delta)

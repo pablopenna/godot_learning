@@ -5,6 +5,8 @@ var current_state: State = initial_state
 @export var initial_state: State
 @export var managed_entity: Entity
 
+signal state_changed(new_state: String, old_state: String)
+
 func _ready():
 	states = get_children_as_state_dictionary()
 	current_state = initial_state
@@ -40,4 +42,4 @@ func on_change_to_state(new_state_name: String):
 	current_state = new_state
 	new_state.enter()
 	
-	EntityEvents.change_state.emit(new_state_name, old_state.state_name)
+	state_changed.emit(new_state_name, old_state.state_name)

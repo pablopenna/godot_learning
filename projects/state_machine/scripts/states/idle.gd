@@ -16,7 +16,7 @@ func process(delta):
 	if Input.is_action_pressed("dash"):
 		change_to_state.emit("dash")
 	
-	if Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right"):
+	if Input.get_axis("move_left", "move_right") != 0:
 		change_to_state.emit("move")
 	
 func exit(new_state):
