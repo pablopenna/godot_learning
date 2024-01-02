@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://doc7vi773287b"]
+[gd_scene load_steps=25 format=3 uid="uid://doc7vi773287b"]
 
 [ext_resource type="Script" path="res://projects/state_machine/scripts/Entity.gd" id="1_a4iy7"]
 [ext_resource type="Texture2D" uid="uid://c2gvprutu15" path="res://common/sprites/statue.png" id="2_mlk2d"]
@@ -27,9 +27,25 @@ size = Vector2(41, 51)
 [sub_resource type="Animation" id="Animation_76u1i"]
 length = 0.001
 
+[sub_resource type="Animation" id="Animation_11e4h"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spritesheet:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [99, 0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qxkjg"]
 _data = {
 "RESET": SubResource("Animation_76u1i"),
+"default": SubResource("Animation_11e4h"),
 "idle": ExtResource("3_iyr77"),
 "run": ExtResource("4_x8utw")
 }
@@ -48,7 +64,6 @@ texture = ExtResource("2_mlk2d")
 [node name="spritesheet" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_ihl6q")]
 position = Vector2(5, -18)
 scale = Vector2(2.5, 2.5)
-frame = 5
 script = ExtResource("4_5f3cj")
 entity = NodePath("..")
 
@@ -79,9 +94,11 @@ script = ExtResource("4_otek0")
 
 [node name="move" type="Node" parent="StateManager"]
 script = ExtResource("5_oq5y8")
+speed = 300.0
 
 [node name="air" type="Node" parent="StateManager"]
 script = ExtResource("6_fydva")
+speed = 200
 
 [node name="jump" type="Node" parent="StateManager"]
 script = ExtResource("7_2u4r5")
