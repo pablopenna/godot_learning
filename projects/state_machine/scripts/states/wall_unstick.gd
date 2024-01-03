@@ -1,6 +1,6 @@
 extends State
 
-@export var unstick_velocity = 100
+@export var unstick_velocity = 1
 
 func _ready():
 	state_name = "wall_unstick"

@@ -1,6 +1,6 @@
 extends State
 
-@export var jump_speed = 500
+@export var jump_speed = 300
 
 func _ready():
 	state_name = "jump"

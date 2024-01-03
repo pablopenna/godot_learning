@@ -26,7 +26,7 @@ func process(delta):
 	if managed_entity.is_on_floor():
 		change_to_state.emit("idle")
 	
-	if managed_entity.is_on_wall():
+	if managed_entity.is_on_wall() and _is_entity_going_down():
 		change_to_state.emit("wall_slide")
 	
 func physics_process(delta):
@@ -35,6 +35,9 @@ func physics_process(delta):
 		managed_entity.velocity.x =  input_dir * speed
 		
 	managed_entity.velocity.y = Vector2.DOWN.y * _get_velocity_applying_gravity(managed_entity.velocity.y, delta)
+	
+func _is_entity_going_down():
+	return managed_entity.velocity.y > 0
 	
 # MRUA -> v = v0 + a*t
 func _get_velocity_applying_gravity(initial_velocity, time) -> float:

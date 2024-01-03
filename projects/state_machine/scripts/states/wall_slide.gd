@@ -20,7 +20,7 @@ func process(delta):
 	if Input.is_action_pressed("move_right") and _does_input_dir_match_wall_normal("move_right", wall_normal):
 		change_to_state.emit("wall_unstick")
 	
-	if Input.is_action_pressed("jump"):
+	if Input.is_action_just_pressed("jump"):
 		change_to_state.emit("wall_jump")
 		
 	if managed_entity.is_on_floor():
