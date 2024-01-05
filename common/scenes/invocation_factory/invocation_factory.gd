@@ -6,7 +6,7 @@ extends Node2D
 func _process(delta):
 	if Input.is_action_just_pressed("summon"):
 			var invocation: Node2D = invocationScene.instantiate()
-			invocation.position = global_position
+			invocation.position = entity_to_get_facing_direction_from.position
 			if entity_to_get_facing_direction_from.facing_direction == FacingDirectionUtils.FacingDirection.LEFT:
 				invocation.scale.x = -1
 			get_tree().get_root().add_child(invocation)

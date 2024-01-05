@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://d01xmvtwdaa5f"]
 
-[ext_resource type="Script" path="res://projects/state_machine/scripts/StateLabel.gd" id="1_6ecyv"]
-[ext_resource type="Script" path="res://projects/state_machine/scripts/StateManager.gd" id="2_76hbj"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/state_label.gd" id="1_6ecyv"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/state_manager.gd" id="2_76hbj"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/idle.gd" id="3_6r46w"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/move.gd" id="4_o17g8"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/air.gd" id="5_n07eh"]
