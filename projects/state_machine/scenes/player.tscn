@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://d01xmvtwdaa5f"]
+[gd_scene load_steps=26 format=3 uid="uid://d01xmvtwdaa5f"]
 
 [ext_resource type="Script" path="res://projects/state_machine/scripts/state_label.gd" id="1_6ecyv"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/state_manager.gd" id="2_76hbj"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_unstick.gd" id="9_8603q"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_jump.gd" id="10_djtw7"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/air_stomp.gd" id="11_ybas7"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/attack_1.gd" id="12_4cww5"]
 [ext_resource type="PackedScene" uid="uid://bdf5bwv2v64el" path="res://common/scenes/invocation_factory/invocation_factory.tscn" id="12_oi5i3"]
 [ext_resource type="PackedScene" uid="uid://cn3hr36koyvbg" path="res://common/scenes/invocation/invocation.tscn" id="13_7vvt5"]
 [ext_resource type="PackedScene" uid="uid://bbx8v44fbyor4" path="res://common/scenes/entity/entity.tscn" id="14_i37u2"]
@@ -19,6 +20,9 @@
 [ext_resource type="Animation" uid="uid://bichib6d0wqpy" path="res://common/sprites/characters/nightborne/default.res" id="17_8al3r"]
 [ext_resource type="Animation" uid="uid://bdrjspb6yb5li" path="res://common/sprites/characters/nightborne/run.res" id="18_b14df"]
 [ext_resource type="Script" path="res://common/scenes/entity/entity_animation_player.gd" id="19_08bgl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l7dds"]
+size = Vector2(109, 149)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ran5a"]
 size = Vector2(41, 51)
@@ -40,8 +44,44 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
+[sub_resource type="Animation" id="Animation_51qxa"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spritesheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [48, 49, 50, 51, 52, 53, 54, 55, 56, 57]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateManager/attack_1")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.7, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"enableHitboxes"
+}, {
+"args": [],
+"method": &"disableHitboxes"
+}, {
+"args": [],
+"method": &"finish"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_egdts"]
 _data = {
+"attack": SubResource("Animation_51qxa"),
 "default": ExtResource("17_8al3r"),
 "idle": SubResource("Animation_q2o48"),
 "run": ExtResource("18_b14df")
@@ -107,6 +147,18 @@ script = ExtResource("10_djtw7")
 script = ExtResource("11_ybas7")
 down_speed = 1000
 
+[node name="attack_1" type="Node" parent="StateManager" node_paths=PackedStringArray("hitboxes")]
+script = ExtResource("12_4cww5")
+hitboxes = [NodePath("Area2D/CollisionShape2D")]
+
+[node name="Area2D" type="Area2D" parent="StateManager/attack_1"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateManager/attack_1/Area2D"]
+position = Vector2(49.5, -24.5)
+shape = SubResource("RectangleShape2D_l7dds")
+
 [node name="InvocationFactory" parent="." node_paths=PackedStringArray("entity_to_get_facing_direction_from") instance=ExtResource("12_oi5i3")]
 invocationScene = ExtResource("13_7vvt5")
 entity_to_get_facing_direction_from = NodePath("../Entity")
@@ -121,7 +173,7 @@ shape = SubResource("RectangleShape2D_ran5a")
 [node name="spritesheet" parent="Entity" node_paths=PackedStringArray("entity") instance=ExtResource("15_jdrqr")]
 position = Vector2(5, -18)
 scale = Vector2(2.5, 2.5)
-frame = 99
+frame = 55
 script = ExtResource("16_c7kal")
 entity = NodePath("..")
 
