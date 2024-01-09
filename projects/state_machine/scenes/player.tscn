@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://d01xmvtwdaa5f"]
+[gd_scene load_steps=28 format=3 uid="uid://d01xmvtwdaa5f"]
 
 [ext_resource type="Script" path="res://projects/state_machine/scripts/state_label.gd" id="1_6ecyv"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/state_manager.gd" id="2_76hbj"]
@@ -14,6 +14,8 @@
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/attack_1.gd" id="12_4cww5"]
 [ext_resource type="PackedScene" uid="uid://bdf5bwv2v64el" path="res://common/scenes/invocation_factory/invocation_factory.tscn" id="12_oi5i3"]
 [ext_resource type="PackedScene" uid="uid://cn3hr36koyvbg" path="res://common/scenes/invocation/invocation.tscn" id="13_7vvt5"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/hitbox_data.gd" id="13_uuxct"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/hitbox.gd" id="13_w3wn8"]
 [ext_resource type="PackedScene" uid="uid://bbx8v44fbyor4" path="res://common/scenes/entity/entity.tscn" id="14_i37u2"]
 [ext_resource type="PackedScene" uid="uid://28mkgryf3qhl" path="res://common/sprites/characters/nightborne/nightborne_spritesheet.tscn" id="15_jdrqr"]
 [ext_resource type="Script" path="res://common/scenes/entity/entity_sprite.gd" id="16_c7kal"]
@@ -26,23 +28,6 @@ size = Vector2(109, 149)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ran5a"]
 size = Vector2(41, 51)
-
-[sub_resource type="Animation" id="Animation_q2o48"]
-resource_name = "idle"
-length = 0.9
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("spritesheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
-}
 
 [sub_resource type="Animation" id="Animation_51qxa"]
 resource_name = "attack"
@@ -77,6 +62,23 @@ tracks/1/keys = {
 "args": [],
 "method": &"finish"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_q2o48"]
+resource_name = "idle"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("spritesheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_egdts"]
@@ -147,15 +149,25 @@ script = ExtResource("10_djtw7")
 script = ExtResource("11_ybas7")
 down_speed = 1000
 
-[node name="attack_1" type="Node" parent="StateManager" node_paths=PackedStringArray("hitboxes")]
+[node name="attack_1" type="Node" parent="StateManager" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("12_4cww5")
-hitboxes = [NodePath("Area2D/CollisionShape2D")]
+hitbox = NodePath("Hitbox")
 
-[node name="Area2D" type="Area2D" parent="StateManager/attack_1"]
+[node name="HitboxData" type="Node" parent="StateManager/attack_1"]
+script = ExtResource("13_uuxct")
+direction = Vector2(0, -1)
+speed = 500.0
+damage = 50
+
+[node name="Hitbox" type="Area2D" parent="StateManager/attack_1" node_paths=PackedStringArray("hitbox_data")]
 collision_layer = 8
-collision_mask = 0
+collision_mask = 4
+monitoring = false
+monitorable = false
+script = ExtResource("13_w3wn8")
+hitbox_data = NodePath("../HitboxData")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateManager/attack_1/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateManager/attack_1/Hitbox"]
 position = Vector2(49.5, -24.5)
 shape = SubResource("RectangleShape2D_l7dds")
 

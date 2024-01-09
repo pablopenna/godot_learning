@@ -24,7 +24,6 @@ shape = SubResource("RectangleShape2D_ciq7n")
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_y4b4m")]
 hitbox_collision_layer = 4
-hitbox_collision_mask = 8
 show_debug_label = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]

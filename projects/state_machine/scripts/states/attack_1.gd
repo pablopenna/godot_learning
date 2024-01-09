@@ -1,6 +1,6 @@
 extends State
 
-@export var hitboxes: Array[CollisionShape2D]
+@export var hitbox: Hitbox
 
 func _ready():
 	state_name = "attack_1"
@@ -12,16 +12,16 @@ func exit(new_state):
 	print("Exiting Attack1")
 
 func process(detla):
-	$Area2D.position = managed_entity.position
-	$Area2D.scale.x = -1  if managed_entity.facing_direction == FacingDirectionUtils.FacingDirection.LEFT else 1	
+	hitbox.position = managed_entity.position
+	hitbox.scale.x = -1 \
+	if managed_entity.facing_direction == FacingDirectionUtils.FacingDirection.LEFT \
+	else 1	
 
 func enableHitboxes():
-	for hitbox:CollisionShape2D in hitboxes:
-		hitbox.disabled = false
+	hitbox.enable()
 
 func disableHitboxes():
-	for hitbox:CollisionShape2D in hitboxes:
-		hitbox.disabled = true
+	hitbox.disable()
 		
 func finish():
 	change_to_state.emit("idle")
