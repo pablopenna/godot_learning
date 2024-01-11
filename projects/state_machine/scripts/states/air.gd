@@ -2,9 +2,7 @@ extends State
 
 @export var speed = 100
 @export var gravity_multiplier = 0.8
-var gravity : int = ProjectSettings.get_setting(
-		"physics/2d/default_gravity"
-	) * gravity_multiplier
+var custom_gravity : float = GravityUtils.get_gravity() * gravity_multiplier
 
 func _ready():
 	state_name = "air"
@@ -34,11 +32,12 @@ func physics_process(delta):
 	if input_dir != 0: # Need to do this as to not overwrite the movement of other states like wall_jump if there is no input while on air
 		managed_entity.velocity.x =  input_dir * speed
 		
-	managed_entity.velocity.y = Vector2.DOWN.y * _get_velocity_applying_gravity(managed_entity.velocity.y, delta)
+	managed_entity.velocity.y = Vector2.DOWN.y * GravityUtils.get_velocity_applying_acceleration(\
+		managed_entity.velocity.y, \
+		custom_gravity,\
+		delta\
+	)
 	
 func _is_entity_going_down():
 	return managed_entity.velocity.y > 0
-	
-# MRUA -> v = v0 + a*t
-func _get_velocity_applying_gravity(initial_velocity, time) -> float:
-	return initial_velocity + gravity * time
+

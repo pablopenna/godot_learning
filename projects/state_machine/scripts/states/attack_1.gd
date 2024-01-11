@@ -11,7 +11,7 @@ func enter():
 func exit(new_state):
 	print("Exiting Attack1")
 
-func process(detla):
+func process(_delta):
 	hitbox.position = managed_entity.position
 	hitbox.scale.x = -1 \
 	if managed_entity.facing_direction == FacingDirectionUtils.FacingDirection.LEFT \

@@ -18,10 +18,10 @@
 [ext_resource type="Script" path="res://projects/state_machine/scripts/hitbox.gd" id="13_w3wn8"]
 [ext_resource type="PackedScene" uid="uid://bbx8v44fbyor4" path="res://common/scenes/entity/entity.tscn" id="14_i37u2"]
 [ext_resource type="PackedScene" uid="uid://28mkgryf3qhl" path="res://common/sprites/characters/nightborne/nightborne_spritesheet.tscn" id="15_jdrqr"]
-[ext_resource type="Script" path="res://common/scenes/entity/entity_sprite.gd" id="16_c7kal"]
+[ext_resource type="Script" path="res://common/scenes/entity/sprite_rotating_with_face_direction.gd" id="16_c7kal"]
 [ext_resource type="Animation" uid="uid://bichib6d0wqpy" path="res://common/sprites/characters/nightborne/default.res" id="17_8al3r"]
 [ext_resource type="Animation" uid="uid://bdrjspb6yb5li" path="res://common/sprites/characters/nightborne/run.res" id="18_b14df"]
-[ext_resource type="Script" path="res://common/scenes/entity/entity_animation_player.gd" id="19_08bgl"]
+[ext_resource type="Script" path="res://common/scenes/entity/animation_player_with_state_map.gd" id="19_08bgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7dds"]
 size = Vector2(109, 149)
