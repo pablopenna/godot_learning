@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cn3hr36koyvbg"]
+[gd_scene load_steps=10 format=3 uid="uid://cn3hr36koyvbg"]
 
 [ext_resource type="Script" path="res://common/scenes/invocation/invocation.gd" id="1_641w6"]
 [ext_resource type="Texture2D" uid="uid://byhgy5al6wto" path="res://common/sprites/characters/nightborne/NightBorne.png" id="2_w7uxh"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/hitbox.gd" id="3_n16nj"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/hitbox_data.gd" id="4_geal0"]
 
 [sub_resource type="Animation" id="Animation_3i6ba"]
 resource_name = "dark_knight"
@@ -88,11 +90,19 @@ libraries = {
 "": SubResource("AnimationLibrary_armeq")
 }
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("hitbox_data")]
 collision_layer = 8
 collision_mask = 4
 monitoring = false
 monitorable = false
+script = ExtResource("3_n16nj")
+hitbox_data = NodePath("HitboxData")
+
+[node name="HitboxData" type="Node" parent="Hitbox"]
+script = ExtResource("4_geal0")
+direction = Vector2(1, 0)
+speed = 100.0
+damage = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(48, 2)
