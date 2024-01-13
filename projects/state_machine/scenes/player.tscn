@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d01xmvtwdaa5f"]
+[gd_scene load_steps=29 format=3 uid="uid://d01xmvtwdaa5f"]
 
 [ext_resource type="Script" path="res://projects/state_machine/scripts/state_label.gd" id="1_6ecyv"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/state_manager.gd" id="2_76hbj"]
@@ -11,12 +11,13 @@
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_unstick.gd" id="9_8603q"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/wall_jump.gd" id="10_djtw7"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/air_stomp.gd" id="11_ybas7"]
-[ext_resource type="Script" path="res://projects/state_machine/scripts/states/attack_1.gd" id="12_4cww5"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/attack/idle_attack.gd" id="12_4cww5"]
 [ext_resource type="PackedScene" uid="uid://bdf5bwv2v64el" path="res://common/scenes/invocation_factory/invocation_factory.tscn" id="12_oi5i3"]
 [ext_resource type="PackedScene" uid="uid://cn3hr36koyvbg" path="res://common/scenes/invocation/invocation.tscn" id="13_7vvt5"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/hitbox_data.gd" id="13_uuxct"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/hitbox.gd" id="13_w3wn8"]
 [ext_resource type="PackedScene" uid="uid://bbx8v44fbyor4" path="res://common/scenes/entity/entity.tscn" id="14_i37u2"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/attack/blink_attack.gd" id="15_7ck2g"]
 [ext_resource type="PackedScene" uid="uid://28mkgryf3qhl" path="res://common/sprites/characters/nightborne/nightborne_spritesheet.tscn" id="15_jdrqr"]
 [ext_resource type="Script" path="res://common/scenes/entity/sprite_rotating_with_face_direction.gd" id="16_c7kal"]
 [ext_resource type="Animation" uid="uid://bichib6d0wqpy" path="res://common/sprites/characters/nightborne/default.res" id="17_8al3r"]
@@ -46,7 +47,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../StateManager/attack_1")
+tracks/1/path = NodePath("../StateManager/idle_attack")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -149,17 +150,17 @@ script = ExtResource("10_djtw7")
 script = ExtResource("11_ybas7")
 down_speed = 1000
 
-[node name="attack_1" type="Node" parent="StateManager" node_paths=PackedStringArray("hitbox")]
+[node name="idle_attack" type="Node" parent="StateManager" node_paths=PackedStringArray("hitbox")]
 script = ExtResource("12_4cww5")
 hitbox = NodePath("Hitbox")
 
-[node name="HitboxData" type="Node" parent="StateManager/attack_1"]
+[node name="HitboxData" type="Node" parent="StateManager/idle_attack"]
 script = ExtResource("13_uuxct")
 direction = Vector2(0, -1)
 speed = 500.0
 damage = 50
 
-[node name="Hitbox" type="Area2D" parent="StateManager/attack_1" node_paths=PackedStringArray("hitbox_data")]
+[node name="Hitbox" type="Area2D" parent="StateManager/idle_attack" node_paths=PackedStringArray("hitbox_data")]
 collision_layer = 8
 collision_mask = 4
 monitoring = false
@@ -167,7 +168,28 @@ monitorable = false
 script = ExtResource("13_w3wn8")
 hitbox_data = NodePath("../HitboxData")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StateManager/attack_1/Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateManager/idle_attack/Hitbox"]
+position = Vector2(49.5, -24.5)
+shape = SubResource("RectangleShape2D_l7dds")
+
+[node name="blink_attack" type="Node" parent="StateManager"]
+script = ExtResource("15_7ck2g")
+
+[node name="HitboxData" type="Node" parent="StateManager/blink_attack"]
+script = ExtResource("13_uuxct")
+direction = Vector2(0, -1)
+speed = 500.0
+damage = 50
+
+[node name="Hitbox" type="Area2D" parent="StateManager/blink_attack" node_paths=PackedStringArray("hitbox_data")]
+collision_layer = 8
+collision_mask = 4
+monitoring = false
+monitorable = false
+script = ExtResource("13_w3wn8")
+hitbox_data = NodePath("../../idle_attack/HitboxData")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateManager/blink_attack/Hitbox"]
 position = Vector2(49.5, -24.5)
 shape = SubResource("RectangleShape2D_l7dds")
 

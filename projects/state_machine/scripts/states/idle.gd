@@ -11,7 +11,10 @@ func process(delta):
 		change_to_state.emit("air")
 	
 	if Input.is_action_just_pressed("attack"):
-		change_to_state.emit("attack_1")
+		if Input.is_action_pressed("move_down"):
+			change_to_state.emit("blink_attack")
+		else:
+			change_to_state.emit("idle_attack")
 	if Input.is_action_just_pressed("jump"):
 		change_to_state.emit("jump")
 	if Input.is_action_just_pressed("dash"):
