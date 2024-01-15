@@ -21,11 +21,11 @@ position = Vector2(574, 0)
 
 [node name="Dummy" parent="." instance=ExtResource("4_nxh17")]
 position = Vector2(458, 187)
-collision_layer = 4
-collision_mask = 10
 
 [node name="NonHitboxArea2D" type="Area2D" parent="."]
 position = Vector2(907, 173)
+collision_layer = 127
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NonHitboxArea2D"]
 position = Vector2(13, -5.5)

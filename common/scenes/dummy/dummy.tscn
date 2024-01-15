@@ -8,10 +8,11 @@
 size = Vector2(22, 69)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_njfmb"]
+size = Vector2(29, 74)
 
 [node name="Dummy" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 3
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_c6xtj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -22,11 +23,14 @@ texture = ExtResource("1_848eq")
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_ciq7n")
 
-[node name="Hurtbox" parent="." instance=ExtResource("3_y4b4m")]
-hitbox_collision_layer = 4
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("linked_entity") instance=ExtResource("3_y4b4m")]
+collision_layer = 64
+linked_entity = NodePath("..")
+hurtbox_collision_layer = 64
 show_debug_label = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-0.5, 4)
 shape = SubResource("RectangleShape2D_njfmb")
 
 [connection signal="damaged" from="Hurtbox" to="." method="_on_hurtbox_damaged"]

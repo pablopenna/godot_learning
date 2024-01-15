@@ -6,7 +6,7 @@ func _on_change_state(new_state, old_state):
 			play("idle")
 		"move":
 			play("run")
-		"attack_1":
+		"idle_attack":
 			play("attack")
 		_:
 			play("default")

@@ -4,7 +4,7 @@ signal damaged
 
 @export var linked_entity: Entity
 
-@export_flags_2d_physics var hitbox_collision_layer
+@export_flags_2d_physics var hurtbox_collision_layer
 # the hurtbox will not scan, it will be passive. The hitbox is in charge of 
 # detecting and triggering the hurtbox when they collision
 # @export_flags_2d_physics var hitbox_collision_mask 
@@ -12,7 +12,7 @@ signal damaged
 @export var show_debug_label = false
 
 func _ready():
-	collision_layer = hitbox_collision_layer
+	collision_layer = hurtbox_collision_layer
 	# collision_mask = hitbox_collision_mask
 	if not show_debug_label:
 		$RichTextLabel.queue_free()

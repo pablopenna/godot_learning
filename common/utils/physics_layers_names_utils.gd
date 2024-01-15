@@ -4,8 +4,10 @@ extends Node # To be set as a global script as it needs to initialize
 const PLAYER = "player"
 const ENVIRONMENT = "environment"
 const ENEMY = "enemy"
-const PLAYER_ATTACK = "player_attack"
-const ENEMY_ATTACK = "enemy_attack"
+const PLAYER_ATTACK = "player_hitbox"
+const ENEMY_ATTACK = "enemy_hitbox"
+const PLAYER_HURTBOX = "player_hurtbox"
+const ENEMY_HURTBOX = "enemy_hurtbox"
 #endregion
 
 var _layers_dict: Dictionary
@@ -22,5 +24,6 @@ func _load_layer_names():
 			_layers_dict[layer] = pow(2, i)
 		
 func get_collision_layer_from_name(name: StringName):
-	push_error("Collision layer named %s does not exist" % name)
+	if not _layers_dict.has(name):
+		push_error("Collision layer named %s does not exist" % name)
 	return _layers_dict[name]
