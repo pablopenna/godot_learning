@@ -175,6 +175,8 @@ shape = SubResource("RectangleShape2D_l7dds")
 
 [node name="blink_attack" type="Node" parent="StateManager"]
 script = ExtResource("15_7ck2g")
+attack_reach = 1000.0
+base_teleportation_after_attack_offset = Vector2(200, 0)
 
 [node name="HitboxData" type="Node" parent="StateManager/blink_attack"]
 script = ExtResource("13_uuxct")

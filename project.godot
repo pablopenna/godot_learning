@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 
 FpsCounter="*res://common/scenes/fps_counter/fps_counter.tscn"
 PhysicsLayersNamesUtils="*res://common/utils/physics_layers_names_utils.gd"
+RaycastUtils="*res://common/utils/raycast_utils.gd"
 
 [display]
 

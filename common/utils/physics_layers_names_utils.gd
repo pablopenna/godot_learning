@@ -23,7 +23,7 @@ func _load_layer_names():
 		if layer:
 			_layers_dict[layer] = pow(2, i)
 		
-func get_collision_layer_from_name(name: StringName):
+func get_collision_layer_from_name(name: StringName) -> int:
 	if not _layers_dict.has(name):
 		push_error("Collision layer named %s does not exist" % name)
 	return _layers_dict[name]
