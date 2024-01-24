@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://common/scenes/invocation/invocation.gd" id="1_641w6"]
 [ext_resource type="Texture2D" uid="uid://byhgy5al6wto" path="res://common/sprites/characters/nightborne/NightBorne.png" id="2_w7uxh"]
-[ext_resource type="Script" path="res://projects/state_machine/scripts/hitbox.gd" id="3_n16nj"]
-[ext_resource type="Script" path="res://projects/state_machine/scripts/hitbox_data.gd" id="4_geal0"]
+[ext_resource type="Script" path="res://common/scenes/hitbox/hitbox.gd" id="3_n16nj"]
+[ext_resource type="Script" path="res://common/scenes/hitbox/hitbox_data.gd" id="4_geal0"]
 
 [sub_resource type="Animation" id="Animation_3i6ba"]
 resource_name = "dark_knight"
