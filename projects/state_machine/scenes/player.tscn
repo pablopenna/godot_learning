@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d01xmvtwdaa5f"]
+[gd_scene load_steps=31 format=3 uid="uid://d01xmvtwdaa5f"]
 
 [ext_resource type="Script" path="res://projects/state_machine/scripts/state_label.gd" id="1_6ecyv"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/state_manager.gd" id="2_76hbj"]
@@ -20,12 +20,16 @@
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/attack/blink_attack.gd" id="15_7ck2g"]
 [ext_resource type="PackedScene" uid="uid://28mkgryf3qhl" path="res://common/sprites/characters/nightborne/nightborne_spritesheet.tscn" id="15_jdrqr"]
 [ext_resource type="Script" path="res://common/scenes/entity/sprite_rotating_with_face_direction.gd" id="16_c7kal"]
+[ext_resource type="Script" path="res://projects/state_machine/scripts/states/attack/rush_attack.gd" id="16_fcxi5"]
 [ext_resource type="Animation" uid="uid://bichib6d0wqpy" path="res://common/sprites/characters/nightborne/default.res" id="17_8al3r"]
 [ext_resource type="Animation" uid="uid://bdrjspb6yb5li" path="res://common/sprites/characters/nightborne/run.res" id="18_b14df"]
 [ext_resource type="Script" path="res://common/scenes/entity/animation_player_with_state_map.gd" id="19_08bgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7dds"]
 size = Vector2(109, 149)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jpwbu"]
+size = Vector2(54, 55)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ran5a"]
 size = Vector2(41, 51)
@@ -176,13 +180,35 @@ shape = SubResource("RectangleShape2D_l7dds")
 [node name="blink_attack" type="Node" parent="StateManager"]
 script = ExtResource("15_7ck2g")
 attack_reach = 1000.0
-base_teleportation_after_attack_offset = Vector2(200, 0)
 
 [node name="HitboxData" type="Node" parent="StateManager/blink_attack"]
 script = ExtResource("13_uuxct")
 direction = Vector2(0, -1)
 speed = 500.0
 damage = 50
+
+[node name="rush_attack" type="Node" parent="StateManager" node_paths=PackedStringArray("hitbox")]
+script = ExtResource("16_fcxi5")
+hitbox = NodePath("Hitbox")
+
+[node name="HitboxData" type="Node" parent="StateManager/rush_attack"]
+script = ExtResource("13_uuxct")
+direction = Vector2(0, -1)
+speed = 500.0
+damage = 50
+
+[node name="Hitbox" type="Area2D" parent="StateManager/rush_attack" node_paths=PackedStringArray("hitbox_data", "entity_to_track")]
+collision_layer = 8
+collision_mask = 64
+monitoring = false
+monitorable = false
+script = ExtResource("13_w3wn8")
+hitbox_data = NodePath("../HitboxData")
+entity_to_track = NodePath("../../../Entity")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StateManager/rush_attack/Hitbox"]
+position = Vector2(39, 11)
+shape = SubResource("RectangleShape2D_jpwbu")
 
 [node name="InvocationFactory" parent="." node_paths=PackedStringArray("entity_to_get_facing_direction_from") instance=ExtResource("12_oi5i3")]
 invocationScene = ExtResource("13_7vvt5")

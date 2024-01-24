@@ -20,7 +20,7 @@ position = Vector2(574, 0)
 [node name="Player" parent="." instance=ExtResource("3_yehho")]
 
 [node name="Dummy" parent="." instance=ExtResource("4_nxh17")]
-position = Vector2(387, 187)
+position = Vector2(309, 187)
 speed = 0
 
 [node name="Dummy2" parent="." instance=ExtResource("4_nxh17")]

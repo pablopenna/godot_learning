@@ -15,11 +15,14 @@ func process(delta):
 	
 	managed_entity.velocity.x = Input.get_axis("move_left", "move_right") * speed
 	
-	if Input.is_action_pressed("jump"):
+	if Input.is_action_just_pressed("jump"):
 		change_to_state.emit("jump")
 		
-	if Input.is_action_pressed("dash"):
+	if Input.is_action_just_pressed("dash"):
 		change_to_state.emit("dash")
+	
+	if Input.is_action_just_pressed("attack"):
+		change_to_state.emit("rush_attack")
 
 	if managed_entity.velocity.x == 0:
 		change_to_state.emit("idle")

@@ -2,7 +2,7 @@ extends BaseAttackState
 
 @export var attack_direction: Vector2 = Vector2.RIGHT
 @export var attack_reach: float = 400
-@export var base_teleportation_after_attack_offset: Vector2 = Vector2(100, 0)
+@onready var hitbox_data = $HitboxData
 
 func _ready():
 	state_name = "blink_attack"
@@ -18,59 +18,48 @@ func finish():
 	change_to_state.emit("idle")
 	
 func _attack_routine():
-	var hurtbox = _scan_hurtboxes()
-	if hurtbox:
-		print(hurtbox)
-		_apply_damage_to_hurtbox(hurtbox)
-		_teleport_opposite_to_target_hurtbox(hurtbox)
+	_hurtbox_raycast()
+	_teleport()
 	finish()
 
-func _scan_hurtboxes(): # raycast only returns a single result, which is the one it collides with first
+func _hurtbox_raycast() -> void:
 	var initial_position = managed_entity.global_position
 	var target_position = _get_target_position(initial_position)
 	var enemy_layer = PhysicsLayersNamesUtils.get_collision_layer_from_name(PhysicsLayersNamesUtils.ENEMY_HURTBOX)
 	var result = RaycastUtils.raycast(initial_position, target_position, enemy_layer)
-	print(result)
+	var colliders_ignored: Array = []
 	
-	return _get_hurtbox_in_raycast_result(result)
+	while(RaycastUtils.does_result_contain_collider(result)):
+		print(result)
+		colliders_ignored.append(result.rid)
+		var hurtbox = Hurtbox.get_hurtbox_from_collider(result.collider)
+		if hurtbox:
+			hurtbox.receiveDamage(hitbox_data)
+			
+		result = RaycastUtils.raycast(initial_position, target_position, enemy_layer, colliders_ignored)
 	
-func _apply_damage_to_hurtbox(hurtbox: Hurtbox):
-	hurtbox.receiveDamage($HitboxData)
-	
-func _teleport_opposite_to_target_hurtbox(target: Hurtbox):
-	var default_offset = target.global_position + _get_teleportation_after_attack_offset()
-	var environment_collision = _check_environment_collision(managed_entity.position, default_offset)
-	if environment_collision:
-		managed_entity.position.x = environment_collision.x
-	else:
-		managed_entity.position.x = default_offset.x
+func _teleport():
+	var point_of_collision_with_environment = _environment_raycast()
+	var teleport_position = _get_target_position(managed_entity.global_position) if point_of_collision_with_environment == null else point_of_collision_with_environment
+	print("tp mv %s" % teleport_position)
+	print("global pos: %s" % managed_entity.global_position)
+	managed_entity.position = teleport_position
 
-func _check_environment_collision(initial_pos: Vector2, target_pos: Vector2):
+func _environment_raycast():
+	var initial_position = managed_entity.global_position
+	var target_position = _get_target_position(initial_position)
 	var environment_layer = PhysicsLayersNamesUtils.get_collision_layer_from_name(PhysicsLayersNamesUtils.ENVIRONMENT)
-	var raycast_result = RaycastUtils.raycast(initial_pos, target_pos, environment_layer)
+	var result = RaycastUtils.raycast(initial_position, target_position, environment_layer)
 	
-	if RaycastUtils.does_result_contain_collider(raycast_result):
-		return raycast_result.position
+	if RaycastUtils.does_result_contain_collider(result):
+		print(result)
+		print(result.position)
+		return result.position
+	print("no ENV COLLISIOn")
 	return null
-
-func _get_hurtbox_in_raycast_result(raycast_result: Dictionary):
-	if RaycastUtils.does_result_contain_collider(raycast_result):
-		var hurtbox = raycast_result.collider as Hurtbox
-		if hurtbox != null:
-			return hurtbox
-	return null
-
+	
 func _get_target_position(initial_position):
 	var vector_to_be_added = attack_direction.normalized() * attack_reach
-	vector_to_be_added.x = vector_to_be_added.x * _get_attack_facing_way()
-	
+	vector_to_be_added.x = vector_to_be_added.x * managed_entity.facing_direction
 	return initial_position + vector_to_be_added
 
-func _get_attack_facing_way():
-	return 1 if managed_entity.facing_direction == FacingDirectionUtils.FacingDirection.RIGHT else -1
-	
-func _get_teleportation_after_attack_offset():
-	var teleportation_offset = base_teleportation_after_attack_offset
-	teleportation_offset.x = teleportation_offset.x * _get_attack_facing_way()
-	
-	return teleportation_offset

@@ -23,3 +23,9 @@ func receiveDamage(hitboxData: HitboxData):
 		$RichTextLabel.text = "Ouch!"
 		await get_tree().create_timer(0.1).timeout
 		$RichTextLabel.text = ""
+		
+static func get_hurtbox_from_collider(collider) -> Hurtbox:
+	var hurtbox = collider as Hurtbox
+	if hurtbox != null:
+		return hurtbox
+	return null
