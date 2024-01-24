@@ -2,17 +2,15 @@ extends State
 
 @export var wall_jump_speed = 300
 @export var wall_jump_direction_addition: Vector2 = Vector2.UP
-@export var min_time_before_going_to_air_in_seconds: float = 0.2
-var start_time: float
+@export var min_time_before_going_to_air_in_ms: int = 200
+var start_time: int
 
 func _ready():
 	state_name = "wall_jump"
-	
 
 func enter():
 	print("Entering Wall Jump")
-	start_time = Time.get_unix_time_from_system()
-	
+	start_time = Time.get_ticks_msec()
 	_add_jump_velocity()
 	
 func exit(newState):
@@ -30,6 +28,6 @@ func _add_jump_velocity():
 	managed_entity.velocity = jump_direction * wall_jump_speed	
 
 func _has_min_time_passed():
-	return Time.get_unix_time_from_system() - start_time > min_time_before_going_to_air_in_seconds
+	return Time.get_ticks_msec() - start_time > min_time_before_going_to_air_in_ms
 	
 	
