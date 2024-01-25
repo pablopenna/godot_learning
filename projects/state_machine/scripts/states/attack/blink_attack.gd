@@ -1,4 +1,4 @@
-extends BaseAttackState
+extends State
 
 @export var attack_direction: Vector2 = Vector2.RIGHT
 @export var attack_reach: float = 400
@@ -41,8 +41,6 @@ func _hurtbox_raycast() -> void:
 func _teleport():
 	var point_of_collision_with_environment = _environment_raycast()
 	var teleport_position = _get_target_position(managed_entity.global_position) if point_of_collision_with_environment == null else point_of_collision_with_environment
-	print("tp mv %s" % teleport_position)
-	print("global pos: %s" % managed_entity.global_position)
 	managed_entity.position = teleport_position
 
 func _environment_raycast():
@@ -52,14 +50,10 @@ func _environment_raycast():
 	var result = RaycastUtils.raycast(initial_position, target_position, environment_layer)
 	
 	if RaycastUtils.does_result_contain_collider(result):
-		print(result)
-		print(result.position)
 		return result.position
-	print("no ENV COLLISIOn")
 	return null
 	
 func _get_target_position(initial_position):
 	var vector_to_be_added = attack_direction.normalized() * attack_reach
 	vector_to_be_added.x = vector_to_be_added.x * managed_entity.facing_direction
 	return initial_position + vector_to_be_added
-

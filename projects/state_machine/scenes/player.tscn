@@ -1,6 +1,7 @@
 [gd_scene load_steps=31 format=3 uid="uid://d01xmvtwdaa5f"]
 
 [ext_resource type="Script" path="res://projects/state_machine/scripts/state_label.gd" id="1_6ecyv"]
+[ext_resource type="Script" path="res://common/scenes/entity/entity.gd" id="1_i1jk0"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/state_manager.gd" id="2_76hbj"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/idle.gd" id="3_6r46w"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/move.gd" id="4_o17g8"]
@@ -16,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://cn3hr36koyvbg" path="res://common/scenes/invocation/invocation.tscn" id="13_7vvt5"]
 [ext_resource type="Script" path="res://common/scenes/hitbox/hitbox_data.gd" id="13_uuxct"]
 [ext_resource type="Script" path="res://common/scenes/hitbox/hitbox.gd" id="13_w3wn8"]
-[ext_resource type="PackedScene" uid="uid://bbx8v44fbyor4" path="res://common/scenes/entity/entity.tscn" id="14_i37u2"]
 [ext_resource type="Script" path="res://projects/state_machine/scripts/states/attack/blink_attack.gd" id="15_7ck2g"]
 [ext_resource type="PackedScene" uid="uid://28mkgryf3qhl" path="res://common/sprites/characters/nightborne/nightborne_spritesheet.tscn" id="15_jdrqr"]
 [ext_resource type="Script" path="res://common/scenes/entity/sprite_rotating_with_face_direction.gd" id="16_c7kal"]
@@ -39,7 +39,7 @@ resource_name = "attack"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("spritesheet:frame")
+tracks/0/path = NodePath("Spritesheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -51,7 +51,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../StateManager/idle_attack")
+tracks/1/path = NodePath("StateManager/idle_attack")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -59,10 +59,10 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [],
-"method": &"enableHitboxes"
+"method": &"enable_hitbox"
 }, {
 "args": [],
-"method": &"disableHitboxes"
+"method": &"disable_hitbox"
 }, {
 "args": [],
 "method": &"finish"
@@ -76,7 +76,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("spritesheet:frame")
+tracks/0/path = NodePath("Spritesheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -94,9 +94,11 @@ _data = {
 "run": ExtResource("18_b14df")
 }
 
-[node name="Player" type="Node"]
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_i1jk0")
 
-[node name="StateLabel" type="RichTextLabel" parent="." node_paths=PackedStringArray("node_to_follow")]
+[node name="StateLabel" type="RichTextLabel" parent="."]
 offset_left = -36.0
 offset_top = -60.0
 offset_right = 66.0
@@ -106,13 +108,12 @@ fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("1_6ecyv")
-node_to_follow = NodePath("../Entity")
 text_offset = Vector2(0, -50)
 
 [node name="StateManager" type="Node" parent="." node_paths=PackedStringArray("initial_state", "managed_entity")]
 script = ExtResource("2_76hbj")
 initial_state = NodePath("idle")
-managed_entity = NodePath("../Entity")
+managed_entity = NodePath("..")
 
 [node name="idle" type="Node" parent="StateManager"]
 script = ExtResource("3_6r46w")
@@ -154,24 +155,21 @@ script = ExtResource("10_djtw7")
 script = ExtResource("11_ybas7")
 down_speed = 1000
 
-[node name="idle_attack" type="Node" parent="StateManager" node_paths=PackedStringArray("hitbox")]
+[node name="idle_attack" type="Node" parent="StateManager"]
 script = ExtResource("12_4cww5")
-hitbox = NodePath("Hitbox")
 
-[node name="HitboxData" type="Node" parent="StateManager/idle_attack"]
-script = ExtResource("13_uuxct")
-direction = Vector2(0, -1)
-speed = 500.0
-damage = 50
-
-[node name="Hitbox" type="Area2D" parent="StateManager/idle_attack" node_paths=PackedStringArray("hitbox_data", "entity_to_track")]
+[node name="Hitbox" type="Area2D" parent="StateManager/idle_attack"]
 collision_layer = 8
 collision_mask = 64
 monitoring = false
 monitorable = false
 script = ExtResource("13_w3wn8")
-hitbox_data = NodePath("../HitboxData")
-entity_to_track = NodePath("../../../Entity")
+
+[node name="HitboxData" type="Node" parent="StateManager/idle_attack/Hitbox"]
+script = ExtResource("13_uuxct")
+direction = Vector2(0, -1)
+speed = 500.0
+damage = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateManager/idle_attack/Hitbox"]
 position = Vector2(49.5, -24.5)
@@ -187,24 +185,21 @@ direction = Vector2(0, -1)
 speed = 500.0
 damage = 50
 
-[node name="rush_attack" type="Node" parent="StateManager" node_paths=PackedStringArray("hitbox")]
+[node name="rush_attack" type="Node" parent="StateManager"]
 script = ExtResource("16_fcxi5")
-hitbox = NodePath("Hitbox")
 
-[node name="HitboxData" type="Node" parent="StateManager/rush_attack"]
-script = ExtResource("13_uuxct")
-direction = Vector2(0, -1)
-speed = 500.0
-damage = 50
-
-[node name="Hitbox" type="Area2D" parent="StateManager/rush_attack" node_paths=PackedStringArray("hitbox_data", "entity_to_track")]
+[node name="Hitbox" type="Area2D" parent="StateManager/rush_attack"]
 collision_layer = 8
 collision_mask = 64
 monitoring = false
 monitorable = false
 script = ExtResource("13_w3wn8")
-hitbox_data = NodePath("../HitboxData")
-entity_to_track = NodePath("../../../Entity")
+
+[node name="HitboxData" type="Node" parent="StateManager/rush_attack/Hitbox"]
+script = ExtResource("13_uuxct")
+direction = Vector2(0, -1)
+speed = 500.0
+damage = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StateManager/rush_attack/Hitbox"]
 position = Vector2(39, 11)
@@ -212,27 +207,24 @@ shape = SubResource("RectangleShape2D_jpwbu")
 
 [node name="InvocationFactory" parent="." node_paths=PackedStringArray("entity_to_get_facing_direction_from") instance=ExtResource("12_oi5i3")]
 invocationScene = ExtResource("13_7vvt5")
-entity_to_get_facing_direction_from = NodePath("../Entity")
+entity_to_get_facing_direction_from = NodePath("..")
 
-[node name="Entity" parent="." instance=ExtResource("14_i37u2")]
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Entity"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5.5, 11.5)
 shape = SubResource("RectangleShape2D_ran5a")
 
-[node name="spritesheet" parent="Entity" node_paths=PackedStringArray("entity") instance=ExtResource("15_jdrqr")]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_egdts")
+}
+script = ExtResource("19_08bgl")
+
+[node name="Spritesheet" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("15_jdrqr")]
 position = Vector2(5, -18)
 scale = Vector2(2.5, 2.5)
 frame = 48
 script = ExtResource("16_c7kal")
 entity = NodePath("..")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Entity"]
-libraries = {
-"": SubResource("AnimationLibrary_egdts")
-}
-script = ExtResource("19_08bgl")
-
 [connection signal="state_changed" from="StateManager" to="StateLabel" method="_on_state_change"]
-[connection signal="state_changed" from="StateManager" to="Entity/AnimationPlayer" method="_on_change_state"]
+[connection signal="state_changed" from="StateManager" to="AnimationPlayer" method="_on_change_state"]
