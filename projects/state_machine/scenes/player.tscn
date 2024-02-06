@@ -128,6 +128,7 @@ speed = 200
 
 [node name="jump" type="Node" parent="StateManager"]
 script = ExtResource("6_e2eaj")
+jump_speed = 1000
 
 [node name="dash" type="Node" parent="StateManager"]
 script = ExtResource("7_pjqgm")

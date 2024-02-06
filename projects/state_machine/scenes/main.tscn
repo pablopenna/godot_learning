@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cha48on3shh4n"]
+[gd_scene load_steps=7 format=3 uid="uid://cha48on3shh4n"]
 
 [ext_resource type="PackedScene" uid="uid://iw2y2tljhrwx" path="res://common/scenes/terrain.tscn" id="3_1yf81"]
 [ext_resource type="PackedScene" uid="uid://cs5xij1m0eito" path="res://projects/main_menu/scenes/return_to_main_menu.tscn" id="3_jl506"]
 [ext_resource type="PackedScene" uid="uid://d01xmvtwdaa5f" path="res://projects/state_machine/scenes/player.tscn" id="3_yehho"]
 [ext_resource type="PackedScene" uid="uid://dptcjh7q8w511" path="res://common/scenes/dummy/dummy.tscn" id="4_nxh17"]
+[ext_resource type="PackedScene" uid="uid://dg0wodn064gs2" path="res://common/scenes/follower_camera/follower_camera.tscn" id="5_usvkw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y01wf"]
 size = Vector2(94, 111)
@@ -18,6 +19,7 @@ position = Vector2(574, 0)
 [node name="ReturnToMainMenu" parent="." instance=ExtResource("3_jl506")]
 
 [node name="Player" parent="." instance=ExtResource("3_yehho")]
+position = Vector2(713, 171)
 
 [node name="Dummy" parent="." instance=ExtResource("4_nxh17")]
 position = Vector2(309, 187)
@@ -35,3 +37,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NonHitboxArea2D"]
 position = Vector2(13, -5.5)
 shape = SubResource("RectangleShape2D_y01wf")
+
+[node name="FollowerCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_usvkw")]
+target = NodePath("../Player")
