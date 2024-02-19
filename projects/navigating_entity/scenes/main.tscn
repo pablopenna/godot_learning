@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cco8sxv8krjma"]
+
+[ext_resource type="PackedScene" uid="uid://iw2y2tljhrwx" path="res://common/scenes/terrain.tscn" id="1_m8rii"]
+[ext_resource type="PackedScene" uid="uid://dg0wodn064gs2" path="res://common/scenes/follower_camera/follower_camera.tscn" id="2_awva7"]
+[ext_resource type="PackedScene" uid="uid://rp37pyfp261x" path="res://projects/navigating_entity/scenes/navigating_entity.tscn" id="3_bufv4"]
+[ext_resource type="PackedScene" uid="uid://cs5xij1m0eito" path="res://projects/main_menu/scenes/return_to_main_menu.tscn" id="4_i186u"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Terrain" parent="." instance=ExtResource("1_m8rii")]
+
+[node name="FollowerCamera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_awva7")]
+target = NodePath("../NavigatingEntity")
+
+[node name="NavigatingEntity" parent="." instance=ExtResource("3_bufv4")]
+position = Vector2(49, 16)
+
+[node name="ReturnToMainMenu" parent="." instance=ExtResource("4_i186u")]
