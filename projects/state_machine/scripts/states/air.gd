@@ -19,29 +19,33 @@ func exit(newState):
 func process(delta):
 	if Input.is_action_pressed("dash"):
 		change_to_state.emit("dash")
+		return
 		
-	if Input.is_action_pressed("move_down") and Input.is_action_pressed("jump"):
+	if Input.is_action_pressed("move_down") and Input.is_action_just_pressed("jump"):
 		change_to_state.emit("air_stomp")
+		return
 		
 	if Input.is_action_just_pressed("attack"):
 		change_to_state.emit("rush_attack")
+		return
 		
 	if managed_entity.is_on_floor():
 		change_to_state.emit("idle")
+		return
 	
 	if managed_entity.is_on_wall() and _is_entity_going_down():
 		change_to_state.emit("wall_slide")
+		return
 	
-func physics_process(delta):
 	var input_dir = Input.get_axis("move_left", "move_right")
 	if input_dir != 0 or override_momentum: # Need to do this as to not overwrite the movement of other states like wall_jump if there is no input while on air
 		override_momentum = true
 		managed_entity.velocity.x =  input_dir * speed
 		
-	managed_entity.velocity.y = Vector2.DOWN.y * GravityUtils.get_velocity_applying_acceleration(\
-		managed_entity.velocity.y, \
-		custom_gravity,\
-		delta\
+	managed_entity.velocity.y = Vector2.DOWN.y * GravityUtils.get_velocity_applying_acceleration(
+		managed_entity.velocity.y,
+		custom_gravity*30 if Input.is_action_just_released("jump") else custom_gravity,
+		delta
 	)
 	
 func _is_entity_going_down():
