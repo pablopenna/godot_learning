@@ -11,6 +11,7 @@ func _ready():
 	states = get_children_as_state_dictionary()
 	current_state = initial_state
 	initialize_states()
+	current_state.enter()
 
 func _process(delta):
 	current_state.process(delta)
