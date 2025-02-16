@@ -50,4 +50,3 @@ func process(delta):
 	
 func _is_entity_going_down():
 	return managed_entity.velocity.y > 0
-
