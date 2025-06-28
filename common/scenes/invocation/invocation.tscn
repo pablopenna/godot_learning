@@ -1,13 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://cn3hr36koyvbg"]
 
-[ext_resource type="Script" path="res://common/scenes/invocation/invocation.gd" id="1_641w6"]
+[ext_resource type="Script" uid="uid://brmfqng8yp5v8" path="res://common/scenes/invocation/invocation.gd" id="1_641w6"]
 [ext_resource type="Texture2D" uid="uid://byhgy5al6wto" path="res://common/sprites/characters/nightborne/NightBorne.png" id="2_w7uxh"]
-[ext_resource type="Script" path="res://common/scenes/hitbox/hitbox.gd" id="3_n16nj"]
-[ext_resource type="Script" path="res://common/scenes/hitbox/hitbox_data.gd" id="4_geal0"]
+[ext_resource type="Script" uid="uid://db5oind3ae5eb" path="res://common/scenes/hitbox/hitbox.gd" id="3_n16nj"]
+[ext_resource type="Script" uid="uid://p7qoauyjb7jf" path="res://common/scenes/hitbox/hitbox_data.gd" id="4_geal0"]
 
 [sub_resource type="Animation" id="Animation_3i6ba"]
 resource_name = "dark_knight"
 length = 1.2
+capture_included = true
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -61,7 +62,7 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_armeq"]
 _data = {
-"dark_knight": SubResource("Animation_3i6ba")
+&"dark_knight": SubResource("Animation_3i6ba")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hnjjk"]

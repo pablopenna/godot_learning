@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://drulietgo1s1s"]
 
-[ext_resource type="Script" path="res://projects/player/scripts/player.gd" id="1_mofd7"]
+[ext_resource type="Script" uid="uid://bbh0opfv00meh" path="res://projects/player/scripts/player.gd" id="1_mofd7"]
 [ext_resource type="Texture2D" uid="uid://c2gvprutu15" path="res://common/sprites/statue.png" id="2_2nkj3"]
 [ext_resource type="PackedScene" uid="uid://cn3hr36koyvbg" path="res://common/scenes/invocation/invocation.tscn" id="2_57qlg"]
 [ext_resource type="PackedScene" uid="uid://bdf5bwv2v64el" path="res://common/scenes/invocation_factory/invocation_factory.tscn" id="4_e21yq"]

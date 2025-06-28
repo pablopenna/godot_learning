@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://dg0wodn064gs2"]
 
-[ext_resource type="Script" path="res://common/scenes/follower_camera/camera_root.gd" id="1_kovmb"]
-[ext_resource type="Script" path="res://common/scenes/follower_camera/camera.gd" id="2_0q7kl"]
-[ext_resource type="Script" path="res://common/scenes/follower_camera/small_box.gd" id="3_1cgvm"]
-[ext_resource type="Script" path="res://common/scenes/follower_camera/big_box.gd" id="4_qme1u"]
+[ext_resource type="Script" uid="uid://bn8qt146chpq0" path="res://common/scenes/follower_camera/camera_root.gd" id="1_kovmb"]
+[ext_resource type="Script" uid="uid://5j8riqa8kucw" path="res://common/scenes/follower_camera/camera.gd" id="2_0q7kl"]
+[ext_resource type="Script" uid="uid://bytplwf6raxqr" path="res://common/scenes/follower_camera/small_box.gd" id="3_1cgvm"]
+[ext_resource type="Script" uid="uid://bynr1lfsbqnfv" path="res://common/scenes/follower_camera/big_box.gd" id="4_qme1u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sc0j0"]
 custom_solver_bias = 1.0

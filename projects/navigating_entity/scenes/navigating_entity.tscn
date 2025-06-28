@@ -1,11 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://rp37pyfp261x"]
 
-[ext_resource type="Script" path="res://common/scenes/entity/entity.gd" id="1_a33fe"]
-[ext_resource type="Script" path="res://common/scenes/entity/sprite_rotating_with_face_direction.gd" id="2_15f2n"]
+[ext_resource type="Script" uid="uid://drb6riy1qo44l" path="res://common/scenes/entity/entity.gd" id="1_a33fe"]
+[ext_resource type="Script" uid="uid://qa3hxqlimdga" path="res://common/scenes/entity/sprite_rotating_with_face_direction.gd" id="2_15f2n"]
 [ext_resource type="Texture2D" uid="uid://bi8m32m4x1rx8" path="res://common/sprites/blob_with_legs.png" id="2_ovrif"]
-[ext_resource type="Script" path="res://projects/state_machine/scripts/state_label.gd" id="4_36kmk"]
-[ext_resource type="Script" path="res://projects/state_machine/scripts/state_manager.gd" id="5_5a11d"]
-[ext_resource type="Script" path="res://projects/navigating_entity/scripts/idle.gd" id="6_sljns"]
+[ext_resource type="Script" uid="uid://e0embgglynt" path="res://projects/navigating_entity/scripts/idle.gd" id="6_sljns"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_123ph"]
 size = Vector2(66, 29)
@@ -29,8 +27,14 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xlvov"]
 _data = {
-"new_animation": SubResource("Animation_o2tmq")
+&"new_animation": SubResource("Animation_o2tmq")
 }
+
+[sub_resource type="Resource" id="Resource_nuxrb"]
+metadata/__load_path__ = "res://projects/state_machine/scripts/state_label.gd"
+
+[sub_resource type="Resource" id="Resource_gosub"]
+metadata/__load_path__ = "res://projects/state_machine/scripts/state_manager.gd"
 
 [node name="NavigatingEntity" type="CharacterBody2D"]
 collision_layer = 4
@@ -55,10 +59,10 @@ libraries = {
 [node name="StateLabel" type="RichTextLabel" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("4_36kmk")
+script = SubResource("Resource_nuxrb")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "managed_entity")]
-script = ExtResource("5_5a11d")
+script = SubResource("Resource_gosub")
 initial_state = NodePath("Idle")
 managed_entity = NodePath("..")
 

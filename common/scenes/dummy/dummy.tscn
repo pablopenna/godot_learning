@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dptcjh7q8w511"]
 
 [ext_resource type="Texture2D" uid="uid://fg7p2gwja7r5" path="res://common/sprites/characters/Training_dummy.png" id="1_848eq"]
-[ext_resource type="Script" path="res://common/scenes/dummy/dummy.gd" id="1_c6xtj"]
+[ext_resource type="Script" uid="uid://vs6glpxgd40x" path="res://common/scenes/dummy/dummy.gd" id="1_c6xtj"]
 [ext_resource type="PackedScene" uid="uid://m4h80v367bd7" path="res://common/scenes/hurtbox/hurtbox.tscn" id="3_y4b4m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ciq7n"]

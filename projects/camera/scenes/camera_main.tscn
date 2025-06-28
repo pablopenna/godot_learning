@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dlpytprq1ow7j"]
 
-[ext_resource type="Script" path="res://projects/camera/scripts/target.gd" id="1_5baui"]
-[ext_resource type="Script" path="res://projects/camera/scripts/camera.gd" id="1_pylbk"]
+[ext_resource type="Script" uid="uid://cx4b7m1p08wqq" path="res://projects/camera/scripts/target.gd" id="1_5baui"]
+[ext_resource type="Script" uid="uid://dulj7luncfir7" path="res://projects/camera/scripts/camera.gd" id="1_pylbk"]
 [ext_resource type="PackedScene" uid="uid://cs5xij1m0eito" path="res://projects/main_menu/scenes/return_to_main_menu.tscn" id="3_hau83"]
 
 [node name="CameraMain" type="Node2D"]
