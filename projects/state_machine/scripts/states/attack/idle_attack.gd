@@ -4,8 +4,8 @@ func _ready():
 	super._ready()
 	state_name = "idle_attack"
 
-func enter():
-	super.enter()
+func enter(_old_state):
+	super.enter(_old_state)
 	print("Entering Idle Attack")
 	
 func exit(new_state):

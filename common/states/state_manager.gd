@@ -11,7 +11,7 @@ func _ready():
 	states = get_children_as_state_dictionary()
 	current_state = initial_state
 	initialize_states()
-	current_state.enter()
+	current_state.enter(initial_state) # HACK: prevent null pointer, might have undesired side effects
 
 func _process(delta):
 	current_state.process(delta)
@@ -41,6 +41,6 @@ func on_change_to_state(new_state_name: String):
 	
 	old_state.exit(new_state)
 	current_state = new_state
-	new_state.enter()
+	new_state.enter(old_state)
 	
 	state_changed.emit(new_state_name, old_state.state_name)

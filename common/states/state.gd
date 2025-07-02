@@ -6,7 +6,7 @@ var managed_entity: Entity
 # StateManager uses this as the dict key where states are stored
 var state_name: String 
 
-func enter():
+func enter(previous_state: State):
 	pass
 	
 func process(delta):

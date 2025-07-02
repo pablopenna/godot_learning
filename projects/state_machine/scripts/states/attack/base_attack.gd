@@ -5,7 +5,7 @@ var hitbox: Hitbox
 func _ready():
 	_find_hitbox_in_children()
 
-func enter():
+func enter(_old_state):
 	_set_entity_on_hitbox()
 
 func enable_hitbox():

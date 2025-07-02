@@ -3,7 +3,7 @@ extends State
 func _ready():
 	state_name = "idle"
 
-func enter():
+func enter(_old_state):
 	print("Entering Idle")
 
 func process(delta):

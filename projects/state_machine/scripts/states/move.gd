@@ -1,12 +1,12 @@
 extends State
 
-@export var speed: float = 200
+const speed: float = 300
 var target_velocity: Vector2
 
 func _ready():
 	state_name = "move"
 
-func enter():
+func enter(_old_state):
 	print("Entering Move")
 	
 func process(delta):

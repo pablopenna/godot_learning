@@ -1,11 +1,11 @@
 extends State
 
-@export var slide_speed = 10
+const slide_speed = 10
 
 func _ready():
 	state_name = "wall_slide"
 
-func enter():
+func enter(_old_state):
 	print("Entering Wall Slide")
 	
 func exit(newState):

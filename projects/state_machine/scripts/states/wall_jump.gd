@@ -1,14 +1,14 @@
 extends State
 
-@export var wall_jump_speed = 300
-@export var wall_jump_direction_addition: Vector2 = Vector2.UP
-@export var min_time_before_going_to_air_in_ms: int = 200
+const wall_jump_speed = 300
+const wall_jump_direction_addition: Vector2 = Vector2.UP
+const min_time_before_going_to_air_in_ms: int = 200
 var start_time: int
 
 func _ready():
 	state_name = "wall_jump"
 
-func enter():
+func enter(_old_state):
 	print("Entering Wall Jump")
 	start_time = Time.get_ticks_msec()
 	_add_jump_velocity()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://d01xmvtwdaa5f"]
+[gd_scene load_steps=39 format=3 uid="uid://d01xmvtwdaa5f"]
 
 [ext_resource type="Script" uid="uid://bcp5b5xias4mw" path="res://common/states/state_label.gd" id="1_6ecyv"]
 [ext_resource type="Script" uid="uid://drb6riy1qo44l" path="res://common/scenes/entity/entity.gd" id="1_i1jk0"]
@@ -27,6 +27,8 @@
 [ext_resource type="Script" uid="uid://cdpuw2bmxk5na" path="res://common/scenes/entity/animation_player_with_state_map.gd" id="19_08bgl"]
 [ext_resource type="Texture2D" uid="uid://yjh5gvawfrcs" path="res://common/sprites/2d_character_template/base/Player Idle 48x48.png" id="21_drcd6"]
 [ext_resource type="Texture2D" uid="uid://byhgy5al6wto" path="res://common/sprites/characters/nightborne/NightBorne.png" id="23_gmqi1"]
+[ext_resource type="Texture2D" uid="uid://xjapnldkg5ag" path="res://common/sprites/2d_character_template/base/player air spin 48x48.png" id="25_gmqi1"]
+[ext_resource type="Texture2D" uid="uid://crfohasaa1pbe" path="res://common/sprites/2d_character_template/base/player wall slide 48x48.png" id="26_e7q3i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7dds"]
 size = Vector2(109, 149)
@@ -35,7 +37,70 @@ size = Vector2(109, 149)
 size = Vector2(54, 55)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ran5a"]
-size = Vector2(41, 51)
+size = Vector2(17, 72)
+
+[sub_resource type="Animation" id="Animation_kvmny"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spritesheet:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("23_gmqi1")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Spritesheet:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Spritesheet:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [23]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Spritesheet:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StateManager/idle_attack/Hitbox:hitbox_data")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
 
 [sub_resource type="Animation" id="Animation_51qxa"]
 resource_name = "attack"
@@ -181,76 +246,119 @@ tracks/3/keys = {
 "values": [10]
 }
 
-[sub_resource type="Animation" id="Animation_kvmny"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_e7q3i"]
+resource_name = "idle"
+length = 0.9
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Spritesheet:texture")
+tracks/0/path = NodePath("Spritesheet:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("23_gmqi1")]
+"values": [0, 1, 2, 3, 4, 5]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Spritesheet:vframes")
+tracks/1/path = NodePath("Spritesheet:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [5]
+"values": [ExtResource("25_gmqi1")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Spritesheet:hframes")
+tracks/2/path = NodePath("Spritesheet:vframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [23]
+"values": [1]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Spritesheet:frame")
+tracks/3/path = NodePath("Spritesheet:hframes")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [6]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("StateManager/idle_attack/Hitbox:hitbox_data")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+
+[sub_resource type="Animation" id="Animation_furju"]
+resource_name = "idle"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spritesheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Spritesheet:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [null]
+"values": [ExtResource("26_e7q3i")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Spritesheet:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Spritesheet:hframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_egdts"]
 _data = {
 &"RESET": SubResource("Animation_kvmny"),
+&"air": SubResource("Animation_e7q3i"),
 &"attack": SubResource("Animation_51qxa"),
 &"default": ExtResource("17_8al3r"),
 &"idle": SubResource("Animation_q2o48"),
-&"run": ExtResource("18_b14df")
+&"run": ExtResource("18_b14df"),
+&"wall_slide": SubResource("Animation_furju")
 }
 
 [node name="Player" type="CharacterBody2D"]
@@ -279,19 +387,16 @@ script = ExtResource("3_6r46w")
 
 [node name="move" type="Node" parent="StateManager"]
 script = ExtResource("4_o17g8")
-speed = 300.0
 
-[node name="air" type="Node" parent="StateManager"]
+[node name="air" type="Node" parent="StateManager" node_paths=PackedStringArray("dash_state")]
 script = ExtResource("5_n07eh")
-speed = 200
+dash_state = NodePath("../dash")
 
 [node name="jump" type="Node" parent="StateManager"]
 script = ExtResource("6_e2eaj")
-jump_speed = 1000
 
 [node name="dash" type="Node" parent="StateManager"]
 script = ExtResource("7_pjqgm")
-dash_speed = 600
 
 [node name="duration" type="Timer" parent="StateManager/dash"]
 wait_time = 0.3
@@ -373,7 +478,7 @@ invocationScene = ExtResource("13_7vvt5")
 entity_to_get_facing_direction_from = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -2)
+position = Vector2(5.5, -14)
 shape = SubResource("RectangleShape2D_ran5a")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

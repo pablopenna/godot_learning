@@ -1,6 +1,6 @@
 extends State
 
-@export var dash_speed = 250
+const dash_speed = 600
 @onready var dash_duration: Timer = $duration
 @onready var dash_cooldown: Timer = $cooldown
 var did_dash: bool
@@ -9,7 +9,7 @@ func _ready():
 	state_name = "dash"
 	dash_duration.timeout.connect(_finish_dash)
 	
-func enter():
+func enter(_old_state):
 	print("Entering Dash")
 	did_dash = false
 	if _is_dash_ready():

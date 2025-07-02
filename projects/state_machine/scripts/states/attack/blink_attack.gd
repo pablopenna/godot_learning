@@ -7,7 +7,7 @@ extends State
 func _ready():
 	state_name = "blink_attack"
 
-func enter():
+func enter(_old_state):
 	print("Entering Blink Attack")
 	_attack_routine()
 	

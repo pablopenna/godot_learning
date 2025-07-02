@@ -1,11 +1,11 @@
 extends State
 
-@export var unstick_velocity = 1
+const unstick_velocity = 1
 
 func _ready():
 	state_name = "wall_unstick"
 
-func enter():
+func enter(_old_state):
 	print("Entering Wall Unstick")
 	
 func exit(newState):

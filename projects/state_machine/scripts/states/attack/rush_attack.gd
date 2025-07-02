@@ -10,8 +10,8 @@ func _ready():
 	super._ready()
 	state_name = "rush_attack"
 
-func enter():
-	super.enter()
+func enter(_old_state):
+	super.enter(_old_state)
 	print("Entering Rush Attack")
 	_calculate_attack_duration_from_distance()
 	attack_start_time_in_ms = Time.get_ticks_msec()

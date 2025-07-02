@@ -1,11 +1,11 @@
 extends State
 
-@export var jump_speed = 300
+const jump_speed = 1000
 
 func _ready():
 	state_name = "jump"
 	
-func enter():
+func enter(_old_state):
 	print("Entering Jump")
 
 func process(delta): # This has been move from enter to process just for StateLabel to detect the signals properly between jump and air

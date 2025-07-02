@@ -5,7 +5,7 @@ extends State
 func _ready():
 	state_name = "air_stomp"
 
-func enter():
+func enter(_old_state):
 	print("Entering Air Stomp")
 	
 func exit(newState):
