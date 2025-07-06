@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://d01xmvtwdaa5f"]
+[gd_scene load_steps=40 format=3 uid="uid://d01xmvtwdaa5f"]
 
 [ext_resource type="Script" uid="uid://bcp5b5xias4mw" path="res://common/states/state_label.gd" id="1_6ecyv"]
 [ext_resource type="Script" uid="uid://drb6riy1qo44l" path="res://common/scenes/entity/entity.gd" id="1_i1jk0"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://byhgy5al6wto" path="res://common/sprites/characters/nightborne/NightBorne.png" id="23_gmqi1"]
 [ext_resource type="Texture2D" uid="uid://xjapnldkg5ag" path="res://common/sprites/2d_character_template/base/player air spin 48x48.png" id="25_gmqi1"]
 [ext_resource type="Texture2D" uid="uid://crfohasaa1pbe" path="res://common/sprites/2d_character_template/base/player wall slide 48x48.png" id="26_e7q3i"]
+[ext_resource type="Script" uid="uid://cw3yvvengfoal" path="res://projects/state_machine/scripts/input_buffer.gd" id="30_kvmny"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7dds"]
 size = Vector2(109, 149)
@@ -100,6 +101,58 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_e7q3i"]
+resource_name = "idle"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spritesheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Spritesheet:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("25_gmqi1")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Spritesheet:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Spritesheet:hframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
 }
 
 [sub_resource type="Animation" id="Animation_51qxa"]
@@ -246,58 +299,6 @@ tracks/3/keys = {
 "values": [10]
 }
 
-[sub_resource type="Animation" id="Animation_e7q3i"]
-resource_name = "idle"
-length = 0.9
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Spritesheet:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Spritesheet:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("25_gmqi1")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Spritesheet:vframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Spritesheet:hframes")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-
 [sub_resource type="Animation" id="Animation_furju"]
 resource_name = "idle"
 length = 0.3
@@ -382,14 +383,17 @@ script = ExtResource("2_76hbj")
 initial_state = NodePath("idle")
 managed_entity = NodePath("..")
 
-[node name="idle" type="Node" parent="StateManager"]
+[node name="idle" type="Node" parent="StateManager" node_paths=PackedStringArray("input_buffer")]
 script = ExtResource("3_6r46w")
+input_buffer = NodePath("../../InputBuffer")
 
-[node name="move" type="Node" parent="StateManager"]
+[node name="move" type="Node" parent="StateManager" node_paths=PackedStringArray("input_buffer")]
 script = ExtResource("4_o17g8")
+input_buffer = NodePath("../../InputBuffer")
 
-[node name="air" type="Node" parent="StateManager" node_paths=PackedStringArray("dash_state")]
+[node name="air" type="Node" parent="StateManager" node_paths=PackedStringArray("input_buffer", "dash_state")]
 script = ExtResource("5_n07eh")
+input_buffer = NodePath("../../InputBuffer")
 dash_state = NodePath("../dash")
 
 [node name="jump" type="Node" parent="StateManager"]
@@ -492,6 +496,9 @@ position = Vector2(5, -18)
 scale = Vector2(2.5, 2.5)
 script = ExtResource("16_c7kal")
 entity = NodePath("..")
+
+[node name="InputBuffer" type="Node" parent="."]
+script = ExtResource("30_kvmny")
 
 [connection signal="state_changed" from="StateManager" to="StateLabel" method="_on_state_change"]
 [connection signal="state_changed" from="StateManager" to="AnimationPlayer" method="_on_change_state"]

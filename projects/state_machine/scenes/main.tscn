@@ -13,9 +13,6 @@ size = Vector2(94, 111)
 
 [node name="Terrain" parent="." instance=ExtResource("3_1yf81")]
 
-[node name="DummyTerrain" parent="." instance=ExtResource("3_1yf81")]
-position = Vector2(574, 0)
-
 [node name="ReturnToMainMenu" parent="." instance=ExtResource("3_jl506")]
 
 [node name="Player" parent="." instance=ExtResource("3_yehho")]

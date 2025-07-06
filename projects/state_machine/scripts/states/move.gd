@@ -3,6 +3,8 @@ extends State
 const speed: float = 300
 var target_velocity: Vector2
 
+@export var input_buffer: InputBuffer
+
 func _ready():
 	state_name = "move"
 
@@ -15,7 +17,8 @@ func process(delta):
 	
 	managed_entity.velocity.x = Input.get_axis("move_left", "move_right") * speed
 	
-	if Input.is_action_just_pressed("jump"):
+	# Input buffer check not needed here as when landing it always goes to IDLE first
+	if Input.is_action_just_pressed("jump"):# or input_buffer.should_buffer_jump():
 		change_to_state.emit("jump")
 		
 	if Input.is_action_just_pressed("dash"):
@@ -28,4 +31,5 @@ func process(delta):
 		change_to_state.emit("idle")
 	
 func exit(new_state):
+	input_buffer.update_last_ground_time()
 	print("Exiting Move")

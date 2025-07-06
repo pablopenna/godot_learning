@@ -1,5 +1,7 @@
 extends State
 
+@export var input_buffer: InputBuffer
+
 func _ready():
 	state_name = "idle"
 
@@ -15,13 +17,16 @@ func process(delta):
 			change_to_state.emit("blink_attack")
 		else:
 			change_to_state.emit("idle_attack")
-	if Input.is_action_just_pressed("jump"):
-		change_to_state.emit("jump")
-	if Input.is_action_just_pressed("dash"):
-		change_to_state.emit("dash")
 	
 	if Input.get_axis("move_left", "move_right") != 0:
 		change_to_state.emit("move")
+		
+	if Input.is_action_just_pressed("dash"):
+		change_to_state.emit("dash")
+	
+	# ORDER MATTERS: placing this at the end makes it override any other state changes in this function that happened in the same frame
+	if Input.is_action_just_pressed("jump") or input_buffer.should_buffer_jump():
+		change_to_state.emit("jump")
 	
 func exit(new_state):
 	print("Exiting Idle")

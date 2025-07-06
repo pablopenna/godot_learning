@@ -1,5 +1,6 @@
 extends State
 
+@export var input_buffer: InputBuffer
 @export var dash_state: State
 const horizontal_speed = 300
 const gravity_multiplier = 1
@@ -9,12 +10,14 @@ var entered_state_time_ms: int
 var custom_gravity : float = GravityUtils.get_gravity() * gravity_multiplier
 var is_there_momentum: bool
 var has_gravity_increase_been_applied: bool
+var previous_state_name: String
 
 func _ready():
 	state_name = "air"
 
 func enter(old_state):
 	print("Entering Air")
+	previous_state_name = old_state.state_name
 	is_there_momentum = true
 	has_gravity_increase_been_applied = false
 	entered_state_time_ms = Time.get_ticks_msec()
@@ -30,6 +33,10 @@ func process(delta):
 		
 	if Input.is_action_pressed("move_down") and Input.is_action_just_pressed("jump"):
 		change_to_state.emit("air_stomp")
+		return
+	
+	if Input.is_action_just_pressed("jump") and input_buffer.can_coyote_time() and previous_state_name == "move":
+		change_to_state.emit("jump")
 		return
 		
 	if Input.is_action_just_pressed("attack"):
